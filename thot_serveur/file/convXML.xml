@@ -1,4 +1,4 @@
-<conversations>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><conversations>
 	<conv>
 		<idConv>1</idConv><nameConv>nom conv 1</nameConv>
 		<idCreateur>1</idCreateur>
@@ -11,8 +11,8 @@
 				</message>
 			<message>
 				<utilisateur>1</utilisateur>
-				<text>reponse de 1</text></message></messages>
+				<text>reponse de 1</text></message><message><utilisateur>1</utilisateur><text>test test test</text></message></messages>
 		<utilisateurs>
 			<utilisateur>1</utilisateur>
-			<utilisateur>2</utilisateur></utilisateurs>
+			<utilisateur>2</utilisateur><utilisateur>3</utilisateur></utilisateurs>
 		</conv></conversations>

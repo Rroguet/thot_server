@@ -1,4 +1,4 @@
-<users>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><users>
 	<user>
 		<login>test1</login>
 		<passWord>test1</passWord>
@@ -16,4 +16,4 @@
 		<userName>un2</userName>
 		<id>2</id>
 		<conversations>
-			<conversation>1</conversation></conversations></user></users>
+			<conversation>1</conversation></conversations></user><user><login>loginU3</login><passWord>passWordU3</passWord><firstName>f3</firstName><lastName>l3</lastName><userName>u3</userName><id>3</id><conversations><conversation>1</conversation></conversations></user></users>

@@ -52,7 +52,8 @@ public class getDataFromXML {
 	    			if(currentElement.getElementsByTagName("login").item(0).getTextContent().equals(login)&&currentElement.getElementsByTagName("passWord").item(0).getTextContent().equals(passWord)) {
 	    				try {
 	    					List<String> conv = new ArrayList<String>();
-	    					NodeList nodeConv = currentElement.getElementsByTagName("conversations");
+	    					NodeList nodeConv = currentElement.getElementsByTagName("conversations").item(0).getChildNodes();
+	    					//Element test = (Element) nodeConv.item(0).getChildNodes();
 	    					/*for (int j = 0; j<nodeConv.getLength(); j++) {
 	    						if (nodeConv.item(j).getNodeType() == Node.ELEMENT_NODE)   {
 	    							Element currentConv = (Element) nodeConv.item(i);
@@ -61,7 +62,7 @@ public class getDataFromXML {
 	    					}*/
 	    					//if(conv.get(0) == null) System.out.println("erreur");
 	    					//else System.out.println("num conv = "+conv.get(0));
-	    					//System.out.println(currentElement.getElementsByTagName("conversations").item(0).getChildNodes().;
+	    					System.out.println("test conv xml:"+nodeConv.item(3).getTextContent());
 	    					Utilisateur u = new Utilisateur(currentElement.getElementsByTagName("firstName").item(0).getTextContent(),
 	    										currentElement.getElementsByTagName("lastName").item(0).getTextContent(),
 	    										currentElement.getElementsByTagName("userName").item(0).getTextContent(),

@@ -6,7 +6,8 @@
 		<userName>un1</userName>
 		<id>1</id>
 		<conversations>
-			<conversation>1</conversation></conversations></user>
+			<conversation>1</conversation>
+			<conversation>2</conversation></conversations></user>
 	<user>
 		<login>test2</login>
 		<passWord>test2</passWord>

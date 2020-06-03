@@ -1,0 +1,18 @@
+<users>
+	<user>
+		<login>test1</login>
+		<passWord>test1</passWord>
+		<firstName>f1</firstName><lastName>l1</lastName>
+		<userName>un1</userName>
+		<id>1</id>
+		<conversations>
+			<conversation>1</conversation></conversations></user>
+	<user>
+		<login>test2</login>
+		<passWord>test2</passWord>
+		<firstName>f2</firstName>
+		<lastName>l2</lastName>
+		<userName>un2</userName>
+		<id>2</id>
+		<conversations>
+			<conversation>1</conversation></conversations></user></users>

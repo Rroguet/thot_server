@@ -21,13 +21,13 @@ public class ServerThread extends Thread {
 			input = new ObjectInputStream(socket.getInputStream());
 			output = new ObjectOutputStream(socket.getOutputStream());
  
+			
  			String login = (String)input.readObject();  //read the object received through the stream and deserialize it
 			System.out.println("server received a login:" + login);
 			String passWord = (String)input.readObject();  //read the object received through the stream and deserialize it
 			System.out.println("server received a pass word:" + passWord);
 			
 			Utilisateur u = xml.getUtilisateur(login, passWord);
-			if(u.getConversationList() != null) System.out.println("list conv:"+u.getConversationList());
 			output.writeObject(u);
 			
         } catch (IOException ex) {

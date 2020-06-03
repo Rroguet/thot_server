@@ -8,14 +8,14 @@ public class Utilisateur implements Serializable{
 	private String lastName;
 	private String userName;
 	private int id;
-	private List<Conversation> conversations;
+	private List<Integer> conversationsId;
 	
-	public Utilisateur (String firstName, String lastName, String userName, int id, List<Conversation> conversations) {
+	public Utilisateur (String firstName, String lastName, String userName, int id, List<Integer> conversationsId) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.userName = userName;
 		this.id = id;
-		this.conversations = conversations;
+		this.conversationsId = conversationsId;
 	}
 	
 	public String getFirstName() {
@@ -34,7 +34,7 @@ public class Utilisateur implements Serializable{
 		return id;
 	}
 	
-	public String getConversationList(){
-		return "";
+	public List<Integer> getConversationList(){
+		return conversationsId;
 	}
 }

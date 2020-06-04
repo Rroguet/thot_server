@@ -20,6 +20,10 @@ public class Conversation implements Serializable{
 		return convId;
 	}
 	
+	public String getNameConv() {
+		return nameConv;
+	}
+	
 	
 	public int getCreateur() {
 		return createur;

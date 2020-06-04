@@ -11,7 +11,6 @@ public class ServerThread extends Thread {
 	private ObjectInputStream input;
 	private ObjectOutputStream output;
 	private getDataFromXML xml = new getDataFromXML();
-	//private writeDataToXML xmlw = new writeDataToXML();
  
     public ServerThread(Socket socket) {
         this.socket = socket;
@@ -23,20 +22,15 @@ public class ServerThread extends Thread {
 			input = new ObjectInputStream(socket.getInputStream());
 			output = new ObjectOutputStream(socket.getOutputStream());
 			
-			writeDataToXML.initWriteDataToXML();
  
+			String action = (String)input.readObject();
 			
- 			String login = (String)input.readObject();  //read the object received through the stream and deserialize it
-			System.out.println("server received a login:" + login);
-			String passWord = (String)input.readObject();  //read the object received through the stream and deserialize it
-			System.out.println("server received a pass word:" + passWord);
+			if(action.equals("login")) login();
+			if(action.equals("newMessage")) newMessage();
+			if(action.equals("newUser")) newUser();
+			if(action.equals("newConv")) newConv();
+			if(action.equals("addUser")) addUser();
 			
-			//writeDataToXML.newUser(new Utilisateur("f3","l3","u3",3,null), "loginU3", "passWordU3");
-			writeDataToXML.addUserToConversation(3, 1);
-			//writeDataToXML.newMessage(new Message(1,"test test test"), 1);
-			Utilisateur u = xml.getUtilisateur(login, passWord);
-			
-			output.writeObject(u);
 			
         } catch (IOException ex) {
             System.out.println("Server exception: " + ex.getMessage());
@@ -53,5 +47,93 @@ public class ServerThread extends Thread {
 				ioe.printStackTrace();
 			}
 		}
+    }
+    
+    public void login() {
+    	try {
+    		String login = (String)input.readObject();  //read the object received through the stream and deserialize it
+    		System.out.println("server received a login:" + login);
+    		String passWord = (String)input.readObject();  //read the object received through the stream and deserialize it
+    		System.out.println("server received a pass word:" + passWord);
+		
+    		Utilisateur u = xml.getUtilisateur(login, passWord);
+		
+    		output.writeObject(u);
+    	} catch (IOException ex) {
+    		System.out.println("Server exception: " + ex.getMessage());
+    		ex.printStackTrace();
+
+    	} catch (ClassNotFoundException ex) {
+    		System.out.println("Server exception: " + ex.getMessage());
+    		ex.printStackTrace();
+    	}
+    }
+    
+    public void newMessage() {
+    	try {
+    		Message m = (Message) input.readObject();  
+    		int convId = (int)input.readObject();
+    				
+    		writeDataToXML.newMessage(m, convId);
+    		System.out.println("new message saved");
+    	} catch (IOException ex) {
+    		System.out.println("Server exception: " + ex.getMessage());
+    		ex.printStackTrace();
+
+    	} catch (ClassNotFoundException ex) {
+    		System.out.println("Server exception: " + ex.getMessage());
+    		ex.printStackTrace();
+    	}
+    }
+    
+    public void newUser() {
+    	try {
+    		String login = (String)input.readObject();
+    		String passWord = (String)input.readObject();
+    		Utilisateur u = (Utilisateur) input.readObject();
+		
+    		writeDataToXML.newUser(u, login, passWord);
+    		System.out.println("new user saved");
+    	} catch (IOException ex) {
+    		System.out.println("Server exception: " + ex.getMessage());
+    		ex.printStackTrace();
+
+    	} catch (ClassNotFoundException ex) {
+    		System.out.println("Server exception: " + ex.getMessage());
+    		ex.printStackTrace();
+    	}
+    }
+    
+    public void newConv() {
+    	try {
+    		Conversation c = (Conversation)input.readObject();
+		
+    		writeDataToXML.newConv(c);
+    		System.out.println("new conversation saved");
+    	} catch (IOException ex) {
+    		System.out.println("Server exception: " + ex.getMessage());
+    		ex.printStackTrace();
+
+    	} catch (ClassNotFoundException ex) {
+    		System.out.println("Server exception: " + ex.getMessage());
+    		ex.printStackTrace();
+    	}
+    }
+    
+    public void addUser() {
+    	try {
+    		int userId = (int)input.readObject();
+    		int convId = (int)input.readObject();
+		
+    		writeDataToXML.addUserToConversation(userId, convId);
+    		System.out.println("user added to conversation");
+    	} catch (IOException ex) {
+    		System.out.println("Server exception: " + ex.getMessage());
+    		ex.printStackTrace();
+
+    	} catch (ClassNotFoundException ex) {
+    		System.out.println("Server exception: " + ex.getMessage());
+    		ex.printStackTrace();
+    	}
     }
 }

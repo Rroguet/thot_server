@@ -75,6 +75,7 @@ public class ServerThread extends Thread {
     		int convId = (int)input.readObject();
     				
     		writeDataToXML.newMessage(m, convId);
+    		output.writeObject(true);
     		System.out.println("new message saved");
     	} catch (IOException ex) {
     		System.out.println("Server exception: " + ex.getMessage());
@@ -93,6 +94,7 @@ public class ServerThread extends Thread {
     		Utilisateur u = (Utilisateur) input.readObject();
 		
     		writeDataToXML.newUser(u, login, passWord);
+    		output.writeObject(true);
     		System.out.println("new user saved");
     	} catch (IOException ex) {
     		System.out.println("Server exception: " + ex.getMessage());
@@ -109,6 +111,7 @@ public class ServerThread extends Thread {
     		Conversation c = (Conversation)input.readObject();
 		
     		writeDataToXML.newConv(c);
+    		output.writeObject(true);
     		System.out.println("new conversation saved");
     	} catch (IOException ex) {
     		System.out.println("Server exception: " + ex.getMessage());
@@ -126,6 +129,7 @@ public class ServerThread extends Thread {
     		int convId = (int)input.readObject();
 		
     		writeDataToXML.addUserToConversation(userId, convId);
+    		output.writeObject(true);
     		System.out.println("user added to conversation");
     	} catch (IOException ex) {
     		System.out.println("Server exception: " + ex.getMessage());

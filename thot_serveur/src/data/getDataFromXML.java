@@ -123,7 +123,7 @@ public class getDataFromXML {
 	    	                        Message msg = new Message(Integer.parseInt(utilisateur), text);
 	    	                        msgList.add(msg);
 	    	                    }
-	    	                }
+	    	                } 
 
 	    					NodeList nodeUserIds = currentElement.getElementsByTagName("utilisateurs").item(0).getChildNodes();
 	    					for (int j=0;j<nodeUserIds.getLength();j++) {

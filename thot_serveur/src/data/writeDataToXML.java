@@ -182,44 +182,39 @@ public class writeDataToXML {
 		addUserToConversationConvXML(userId,convId);
 	}
 	
-	/*public void newConv(Conversation c) {
+	public static void newConv(Conversation c) {
 		try{
-			Document document = documentBuilder.parse(new File(Constant.pathConvXML));
-		    Element root = document.getDocumentElement();
+		      Document document = documentBuilder.parse(new File(Constant.pathConvXML));
+		      Element root = document.getDocumentElement();
+		      		      
+		      Element conv = document.createElement("conv");
+
+		      Element idConv = document.createElement("idConv");
+		      idConv.appendChild(document.createTextNode(String.valueOf(c.getConvId())));
+		      conv.appendChild(idConv);
+
+		      Element nameConv = document.createElement("nameConv");
+		      nameConv.appendChild(document.createTextNode(c.getNameConv()));
+		      conv.appendChild(nameConv);
+
+		      Element idCreateur = document.createElement("idCreateur");
+		      idCreateur.appendChild(document.createTextNode(String.valueOf(c.getCreateur())));
+		      conv.appendChild(idCreateur);
 		      
-		    NodeList nodes = root.getChildNodes();
-		    if (nodes == null) return;
-		     
-		    for (int i = 0; i<nodes.getLength(); i++) {
-		    	if (nodes.item(i).getNodeType() == Node.ELEMENT_NODE)   {
-		    		Element currentElement = (Element) nodes.item(i);
-		    		if(currentElement.getElementsByTagName("idConv").item(0).getTextContent().equals(String.valueOf(idConv))){
-		    			Element message = document.createElement("message");
-
-		      	      	Element userMessage = document.createElement("utilisateur");
-		      	      	userMessage.appendChild(document.createTextNode(String.valueOf(m.getUtilisateur())));
-		      	      	message.appendChild(userMessage);
-
-		      	      	Element textMessage = document.createElement("text");
-		      	      	textMessage.appendChild(document.createTextNode(m.getMessage()));
-		      	      	message.appendChild(textMessage);
-
-		      	      	currentElement.getElementsByTagName("messages").item(0).appendChild(message);
+		      Element messages = document.createElement("messages");
+		      conv.appendChild(messages);
+		      
+		      Element utilisateurs = document.createElement("utilisateurs");
+		      conv.appendChild(utilisateurs);
+		      
+		      root.appendChild(conv);
 		      	      
-		      	      	DOMSource source = new DOMSource(document);
-		      	      	TransformerFactory transformerFactory = TransformerFactory.newInstance();
-		      	      	Transformer transformer = transformerFactory.newTransformer();
-		      	      	StreamResult result = new StreamResult(new File(Constant.pathConvXML));
-		      	      	transformer.transform(source, result);
-		      	      	return;
-		            }
-		    	}
+		      createXMLFile(document,Constant.pathConvXML);
+		      return;
+
+		    }catch (SAXException e){
+		    }catch (IOException e){
 		    }
-
-
-		}catch (TransformerException e){
-		}catch (SAXException e){
-		}catch (IOException e){}
-	}*/
+	}
 
 }

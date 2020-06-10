@@ -4,9 +4,6 @@ import presentation.model.*;
 
 
 import javax.xml.parsers.*;
-import javax.xml.transform.*;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import org.xml.sax.SAXException;
 
 import org.w3c.dom.*;
@@ -69,4 +66,87 @@ public class getDataFromXML {
 	    }
 	    return null;
 	}
+	
+	public Utilisateur getUserById(int userId){
+	    NodeList nodes = parseXMLFile(Constant.pathUserXML);
+	    if (nodes == null) return null;
+	    
+		for (int i = 0; i<nodes.getLength(); i++) {
+			if (nodes.item(i).getNodeType() == Node.ELEMENT_NODE)   {
+				Element currentElement = (Element) nodes.item(i);
+	    		if (currentElement.getNodeName().equals("user")){
+	    			if(Integer.parseInt(currentElement.getElementsByTagName("id").item(0).getTextContent()) == userId) {
+	    				try {
+	    					List<Integer> conv = new ArrayList<Integer>();
+	    					NodeList nodeConv = currentElement.getElementsByTagName("conversations").item(0).getChildNodes();
+	    					for (int j = 1; j<nodeConv.getLength(); j+=2) {
+	    						conv.add(Integer.parseInt(nodeConv.item(j).getTextContent()));
+	    					}
+	    					Utilisateur u = new Utilisateur(currentElement.getElementsByTagName("firstName").item(0).getTextContent(),
+	    										currentElement.getElementsByTagName("lastName").item(0).getTextContent(),
+	    										currentElement.getElementsByTagName("userName").item(0).getTextContent(),
+	    										Integer.parseInt(currentElement.getElementsByTagName("id").item(0).getTextContent()),
+	    										conv);
+	    					return u;
+	    				} catch (Exception ex) {}
+	    			}
+	    		}
+	    	}
+	    }
+	    return null;
+	}
+	
+	public Conversation getConvFromID(int convId) {
+		List<Utilisateur> userList;
+		List<Message> msgList;
+		NodeList nodes = parseXMLFile(Constant.pathConvXML);
+		if (nodes == null) return null;
+
+		for (int i = 0; i<nodes.getLength(); i++) {
+			if (nodes.item(i).getNodeType() == Node.ELEMENT_NODE)   {
+				Element currentElement = (Element) nodes.item(i);
+	    		if (currentElement.getNodeName().equals("conv")){
+	    			Conversation conv;
+	    			if(Integer.parseInt(currentElement.getElementsByTagName("idConv").item(0).getTextContent())==convId) {
+	    				try {
+	    					
+	    					msgList = new ArrayList<Message>();
+	    					userList = new ArrayList<Utilisateur>();
+	    					//Block filling the message list of the conversation
+	    	                NodeList nodeMsg = currentElement.getElementsByTagName("messages").item(0).getChildNodes();
+	    	                for (int j=0;j<nodeMsg.getLength();j++) {
+	    	                	Node node = nodeMsg.item(j);
+                                if (node.getNodeType() == Node.ELEMENT_NODE) {
+                                	Element message = (Element) node;
+	    	                        String utilisateur = message.getElementsByTagName("utilisateur").item(0).getTextContent();
+	    	                        String text = message.getElementsByTagName("text").item(0).getTextContent();
+	    	                        Message msg = new Message(Integer.parseInt(utilisateur), text);
+	    	                        msgList.add(msg);
+	    	                    }
+	    	                } 
+
+	    					NodeList nodeUserIds = currentElement.getElementsByTagName("utilisateurs").item(0).getChildNodes();
+	    					for (int j=0;j<nodeUserIds.getLength();j++) {
+	    						Node node = nodeUserIds.item(j);
+	    						if (node.getNodeType() == Node.ELEMENT_NODE) {
+	    							Element user = (Element) node;
+	    							String userTagContent = (user.getTextContent());
+	    							int userId = Integer.parseInt(userTagContent);
+	    							userList.add(getUserById(userId));
+	    						}
+	    					}
+	    					conv = new Conversation(convId,
+	    										currentElement.getElementsByTagName("nameConv").item(0).getTextContent(),
+	    										Integer.parseInt(currentElement.getElementsByTagName("idCreateur").item(0).getTextContent()),
+	    										msgList,
+	    										userList);
+	    					return conv;
+	    				} catch (Exception ex) {}
+	    			}
+	    		}
+	    	}
+	    }
+	    return null;
+	}
+	
 }

@@ -7,10 +7,12 @@ public class Conversation implements Serializable{
 	private int convId;
 	private List<Message> messages;
 	private List<Utilisateur> utilisateurs;
-	private String nameConv;
+	private String name;
 	private int createur;
 
-	public Conversation(String nameConv, int createur, List<Message> messages, List<Utilisateur> utilisateurs) {
+	public Conversation(int convId, String name, int createur, List<Message> messages, List<Utilisateur> utilisateurs) {
+		this.name = name;
+		this.convId = convId;
 		this.createur = createur;
 		this.messages = messages;
 		this.utilisateurs = utilisateurs;
@@ -19,11 +21,10 @@ public class Conversation implements Serializable{
 	public int getConvId() {
 		return convId;
 	}
-	
-	public String getNameConv() {
-		return nameConv;
+
+	public String getName() {
+		return name;
 	}
-	
 	
 	public int getCreateur() {
 		return createur;

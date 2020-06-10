@@ -7,7 +7,9 @@
 		<id>1</id>
 		<conversations>
 			<conversation>4</conversation>
-			<conversation>2</conversation></conversations></user>
+			<conversation>2</conversation>
+		</conversations>
+	</user>
 	<user>
 		<login>test2</login>
 		<passWord>test2</passWord>
@@ -16,4 +18,20 @@
 		<userName>un2</userName>
 		<id>2</id>
 		<conversations>
-			<conversation>1</conversation></conversations></user><user><login>loginU3</login><passWord>passWordU3</passWord><firstName>f3</firstName><lastName>l3</lastName><userName>u3</userName><id>3</id><conversations><conversation>1</conversation></conversations></user></users>
+			<conversation>1</conversation>
+		</conversations>
+	</user>
+	<user>
+		<login>loginU3</login>
+		<passWord>passWordU3</passWord>
+		<firstName>f3</firstName>
+		<lastName>l3</lastName>
+		<userName>u3</userName>
+		<id>3</id>
+		<conversations>
+			<conversation>1</conversation>
+			<conversation>1</conversation>
+			<conversation>1</conversation>
+		<conversation>1</conversation></conversations>
+	</user>
+</users>

@@ -10,9 +10,7 @@ public class ServerThread extends Thread {
     private Socket socket;
 	private ObjectInputStream input;
 	private ObjectOutputStream output;
-	private getDataFromXML xml = new getDataFromXML();
- 
-    public ServerThread(Socket socket) {
+	public ServerThread(Socket socket) {
         this.socket = socket;
     }
  
@@ -30,11 +28,11 @@ public class ServerThread extends Thread {
 			if(action.equals("newUser")) newUser();
 			if(action.equals("newConv")) newConv();
 			if(action.equals("addUser")) addUser();
-						//writeDataToXML.newUser(new Utilisateur("f3","l3","u3",3,null), "loginU3", "passWordU3");
+			//writeDataToXML.newUser(new Utilisateur("f3","l3","u3",3,null), "loginU3", "passWordU3");
 			//writeDataToXML.addUserToConversation(3, 1);
 			//writeDataToXML.newMessage(new Message(1,"test test test"), 1);
 			//Utilisateur u = xml.getUtilisateur(login, passWord);
-			Conversation conv = xml.getConvFromID(1);
+			Conversation conv = getDataFromXML.getConvFromID(1);
 			System.out.println("Conversation found : " + conv.getName());
 			//output.writeObject(u);
 			output.writeObject(conv);
@@ -64,7 +62,7 @@ public class ServerThread extends Thread {
     		String passWord = (String)input.readObject();  //read the object received through the stream and deserialize it
     		System.out.println("server received a pass word:" + passWord);
 		
-    		Utilisateur u = xml.getUtilisateur(login, passWord);
+    		Utilisateur u = getDataFromXML.getUtilisateur(login, passWord);
 		
     		output.writeObject(u);
     	} catch (IOException ex) {

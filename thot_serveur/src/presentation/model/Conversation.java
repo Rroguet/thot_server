@@ -4,14 +4,18 @@ import java.io.Serializable;
 import java.util.*;
 
 public class Conversation implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	//private UUID convId
 	private int convId;
 	private List<Message> messages;
 	private List<Utilisateur> utilisateurs;
-	private String name;
+	private String nameConv;
 	private int createur;
 
-	public Conversation(int convId, String name, int createur, List<Message> messages, List<Utilisateur> utilisateurs) {
-		this.name = name;
+	public Conversation(int convId, String nameConv, int createur, List<Message> messages, List<Utilisateur> utilisateurs) {
 		this.convId = convId;
 		this.createur = createur;
 		this.messages = messages;
@@ -21,9 +25,9 @@ public class Conversation implements Serializable{
 	public int getConvId() {
 		return convId;
 	}
-
+	
 	public String getName() {
-		return name;
+		return nameConv;
 	}
 	
 	public int getCreateur() {
@@ -49,4 +53,9 @@ public class Conversation implements Serializable{
 	public void removeMessage(Message m) {
 		
 	}
+
+	public void setName(String nameConv) {
+		this.nameConv=nameConv;
+	}
+
 }

@@ -25,7 +25,7 @@ public class getDataFromXML {
         }
 	}
 	
-	public NodeList parseXMLFile (String filePath) {
+	public static NodeList parseXMLFile (String filePath) {
 		NodeList elementNodes = null;
 		try {
 			Document document= documentBuilder.parse(new File(filePath));
@@ -38,7 +38,7 @@ public class getDataFromXML {
 		return elementNodes;
 	}
 	
-	public Utilisateur getUtilisateur(String login, String passWord){
+	public static Utilisateur getUtilisateur(String login, String passWord){
 	    NodeList nodes = parseXMLFile(Constant.pathUserXML);
 	    if (nodes == null) return null;
 	    
@@ -67,7 +67,7 @@ public class getDataFromXML {
 	    return null;
 	}
 	
-	public Utilisateur getUserById(int userId){
+	public static Utilisateur getUserById(int userId){
 	    NodeList nodes = parseXMLFile(Constant.pathUserXML);
 	    if (nodes == null) return null;
 	    
@@ -96,7 +96,7 @@ public class getDataFromXML {
 	    return null;
 	}
 	
-	public Conversation getConvFromID(int convId) {
+	public static Conversation getConvByID(int convId) {
 		List<Utilisateur> userList;
 		List<Message> msgList;
 		NodeList nodes = parseXMLFile(Constant.pathConvXML);
@@ -149,4 +149,19 @@ public class getDataFromXML {
 	    return null;
 	}
 	
+	public static List<Conversation> getConvListOfUser(Utilisateur u){
+		List<Conversation> convList = new ArrayList<Conversation>();
+		for (Integer i : u.getConversationList()) {
+			convList.add(getConvByID(i));
+		}
+		return convList;
+	}
+	
+	public static List<Utilisateur> getUserListFromIdList(List<Integer> userIdList){
+		List<Utilisateur> userList = new ArrayList<Utilisateur>();
+		for (Integer i : userIdList) {
+			userList.add(getUserById(i));
+		}
+		return userList;
+	}
 }

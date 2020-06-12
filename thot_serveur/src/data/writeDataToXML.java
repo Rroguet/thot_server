@@ -194,7 +194,7 @@ public class writeDataToXML {
 		      conv.appendChild(idConv);
 
 		      Element nameConv = document.createElement("nameConv");
-		      nameConv.appendChild(document.createTextNode(c.getNameConv()));
+		      nameConv.appendChild(document.createTextNode(c.getName()));
 		      conv.appendChild(nameConv);
 
 		      Element idCreateur = document.createElement("idCreateur");

@@ -1,4 +1,4 @@
-package thot_serveur;
+package business;
 import java.io.*;  
 import java.net.*;
 

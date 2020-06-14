@@ -1,4 +1,4 @@
-package thot_serveur;
+package business;
 
 public abstract class AbstractServer {
 	public abstract void connect(String ip);

@@ -1,4 +1,4 @@
-package thot_serveur;
+package business;
 import java.io.*;
 import java.net.*;
 
@@ -28,14 +28,6 @@ public class ServerThread extends Thread {
 			if(action.equals("newUser")) newUser();
 			if(action.equals("newConv")) newConv();
 			if(action.equals("addUser")) addUser();
-			//writeDataToXML.newUser(new Utilisateur("f3","l3","u3",3,null), "loginU3", "passWordU3");
-			//writeDataToXML.addUserToConversation(3, 1);
-			//writeDataToXML.newMessage(new Message(1,"test test test"), 1);
-			//Utilisateur u = xml.getUtilisateur(login, passWord);
-			Conversation conv = getDataFromXML.getConvFromID(1);
-			System.out.println("Conversation found : " + conv.getName());
-			//output.writeObject(u);
-			output.writeObject(conv);
 
 			
         } catch (IOException ex) {

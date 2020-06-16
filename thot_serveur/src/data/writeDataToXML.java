@@ -1,9 +1,8 @@
 package data;
 
 import presentation.model.*;
+import singletons.Singletons;
 
-
-import javax.xml.parsers.*;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -15,17 +14,6 @@ import java.io.File;
 
 
 public class writeDataToXML {
-	private static DocumentBuilderFactory documentFactory;
-	private static DocumentBuilder documentBuilder;
-	
-	public static void initWriteDataToXML() {
-		try {
-			documentFactory = DocumentBuilderFactory.newInstance();
-			documentBuilder = documentFactory.newDocumentBuilder();
-        } catch (ParserConfigurationException pce) {
-            pce.printStackTrace();
-        }
-	}
 	
 	public static void createXMLFile(Document document, String filePath){
 		try {
@@ -42,7 +30,7 @@ public class writeDataToXML {
 	
 	public static void newMessage(Message m, int idConv) {
 	    try{
-	      Document document = documentBuilder.parse(new File(Constant.pathConvXML));
+	      Document document = Singletons.getDocumentBuilder().parse(new File(Constant.pathConvXML));
 	      Element root = document.getDocumentElement();
 	      
 	      NodeList nodes = root.getChildNodes();
@@ -77,7 +65,7 @@ public class writeDataToXML {
 	
 	public static void newUser(Utilisateur u, String login, String passWord) {
 		try{
-		      Document document = documentBuilder.parse(new File(Constant.pathUserXML));
+		      Document document = Singletons.getDocumentBuilder().parse(new File(Constant.pathUserXML));
 		      Element root = document.getDocumentElement();
 		      		      
 		      Element utilisateur = document.createElement("user");
@@ -122,7 +110,7 @@ public class writeDataToXML {
 	
 	public static void addUserToConversationUserXML(int userId, int convId) {
 		try{
-			Document document = documentBuilder.parse(new File(Constant.pathUserXML));
+			Document document = Singletons.getDocumentBuilder().parse(new File(Constant.pathUserXML));
 		    Element root = document.getDocumentElement();
 		      
 		    NodeList nodes = root.getChildNodes();
@@ -150,7 +138,7 @@ public class writeDataToXML {
 	
 	public static void addUserToConversationConvXML(int userId, int convId) {
 		try{
-			Document document = documentBuilder.parse(new File(Constant.pathConvXML));
+			Document document = Singletons.getDocumentBuilder().parse(new File(Constant.pathConvXML));
 		    Element root = document.getDocumentElement();
 		      
 		    NodeList nodes = root.getChildNodes();
@@ -184,7 +172,7 @@ public class writeDataToXML {
 	
 	public static void newConv(Conversation c) {
 		try{
-		      Document document = documentBuilder.parse(new File(Constant.pathConvXML));
+		      Document document = Singletons.getDocumentBuilder().parse(new File(Constant.pathConvXML));
 		      Element root = document.getDocumentElement();
 		      		      
 		      Element conv = document.createElement("conv");

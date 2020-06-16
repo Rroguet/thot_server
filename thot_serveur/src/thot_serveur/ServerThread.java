@@ -32,7 +32,7 @@ public class ServerThread extends Thread {
 			//writeDataToXML.addUserToConversation(3, 1);
 			//writeDataToXML.newMessage(new Message(1,"test test test"), 1);
 			//Utilisateur u = xml.getUtilisateur(login, passWord);
-			Conversation conv = getDataFromXML.getConvFromID(1);
+			Conversation conv = getDataFromXML.getConvByID(1);
 			System.out.println("Conversation found : " + conv.getName());
 			//output.writeObject(u);
 			output.writeObject(conv);

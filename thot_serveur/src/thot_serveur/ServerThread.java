@@ -23,30 +23,23 @@ public class ServerThread extends Thread {
 			output = new ObjectOutputStream(socket.getOutputStream());
 			
  
-			String action = (String)input.readObject();
+			String action;
+			do {
+				action = (String)input.readObject();
 			
-			if(action.equals("login")) login();
-			if(action.equals("newMessage")) newMessage();
-			if(action.equals("newUser")) newUser();
-			if(action.equals("newConv")) newConv();
-			if(action.equals("addUser")) addUser();
-			if(action.equals("getConvNames")) getUserConvNameList();
-			if(action.equals("getConv")) getSelectedConvById();
-			if(action.equals("getUsersNames")) getUsersNames();
-			//writeDataToXML.newUser(new Utilisateur("f3","l3","u3",3,null), "loginU3", "passWordU3");
-			//writeDataToXML.addUserToConversation(3, 1);
-			//writeDataToXML.newMessage(new Message(1,"test test test"), 1);
-			//Utilisateur u = xml.getUtilisateur(login, passWord);
-			Conversation conv = getDataFromXML.getConvById(1);
-			System.out.println("Conversation found : " + conv.getName());
-			//output.writeObject(u);
-			output.writeObject(conv);
-
+				if(action.equals("login")) login();
+				if(action.equals("newMessage")) newMessage();
+				if(action.equals("newUser")) newUser();
+				if(action.equals("newConv")) newConv();
+				if(action.equals("addUser")) addUser();
+				if(action.equals("getConvNames")) getUserConvNameList();
+				if(action.equals("getConv")) getSelectedConvById();
+				if(action.equals("getUsersNames")) getUsersNames();
+			} while (socket.isConnected());
 			
         } catch (IOException ex) {
             System.out.println("Server exception: " + ex.getMessage());
             ex.printStackTrace();
-
 		} catch (ClassNotFoundException ex) {
             System.out.println("Server exception: " + ex.getMessage());
             ex.printStackTrace();

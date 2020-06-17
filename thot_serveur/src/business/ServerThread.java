@@ -39,10 +39,8 @@ public class ServerThread extends Thread {
 			
         } catch (IOException ex) {
             System.out.println("Server exception: " + ex.getMessage());
-            ex.printStackTrace();
 		} catch (ClassNotFoundException ex) {
             System.out.println("Server exception: " + ex.getMessage());
-            ex.printStackTrace();
         } finally {
 			try {
 				output.close();
@@ -61,8 +59,8 @@ public class ServerThread extends Thread {
     		System.out.println("server received a pass word:" + passWord);
 		
     		Utilisateur u = getDataFromXML.getUtilisateur(login, passWord);
-		
     		output.writeObject(u);
+    		
     	} catch (IOException ex) {
     		System.out.println("Server exception: " + ex.getMessage());
     		ex.printStackTrace();

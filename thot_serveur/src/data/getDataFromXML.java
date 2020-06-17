@@ -1,9 +1,8 @@
 package data;
 
 import presentation.model.*;
+import singletons.Singletons;
 
-
-import javax.xml.parsers.*;
 import org.xml.sax.SAXException;
 
 import org.w3c.dom.*;
@@ -12,23 +11,11 @@ import java.io.File;
 import java.util.*;
 
 public class getDataFromXML {
-	
-	private static DocumentBuilderFactory documentFactory;
-	private static DocumentBuilder documentBuilder;
-	
-	public getDataFromXML() {
-		try {
-			documentFactory = DocumentBuilderFactory.newInstance();
-			documentBuilder = documentFactory.newDocumentBuilder();
-        } catch (ParserConfigurationException pce) {
-            pce.printStackTrace();
-        }
-	}
-	
+		
 	public static NodeList parseXMLFile (String filePath) {
 		NodeList elementNodes = null;
 		try {
-			Document document= documentBuilder.parse(new File(filePath));
+			Document document= Singletons.getDocumentBuilder().parse(new File(filePath));
 			Element root = document.getDocumentElement();
 
 			elementNodes = root.getChildNodes();

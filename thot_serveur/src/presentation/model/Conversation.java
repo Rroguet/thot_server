@@ -17,6 +17,7 @@ public class Conversation implements Serializable{
 
 	public Conversation(int convId, String nameConv, int createur, List<Message> messages, List<Utilisateur> utilisateurs) {
 		this.convId = convId;
+		this.nameConv = nameConv;
 		this.createur = createur;
 		this.messages = messages;
 		this.utilisateurs = utilisateurs;

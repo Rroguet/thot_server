@@ -96,7 +96,7 @@ public class getDataFromXML {
 	    return null;
 	}
 	
-	public static Conversation getConvByID(int convId) {
+	public static Conversation getConvById(int convId) {
 		List<Utilisateur> userList;
 		List<Message> msgList;
 		NodeList nodes = parseXMLFile(Constant.pathConvXML);
@@ -152,9 +152,17 @@ public class getDataFromXML {
 	public static List<Conversation> getConvListOfUser(Utilisateur u){
 		List<Conversation> convList = new ArrayList<Conversation>();
 		for (Integer i : u.getConversationList()) {
-			convList.add(getConvByID(i));
+			convList.add(getConvById(i));
 		}
 		return convList;
+	}
+	
+	public static List<String> getConvNamesOfUser(Utilisateur u){
+		List<String> convNames = new ArrayList<String>();
+		for (Integer i : u.getConversationList()) {
+			convNames.add(getConvById(i).getName());
+		}
+		return convNames;
 	}
 	
 	public static List<Utilisateur> getUserListFromIdList(List<Integer> userIdList){

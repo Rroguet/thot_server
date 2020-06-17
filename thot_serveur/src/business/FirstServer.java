@@ -3,8 +3,6 @@ package business;
 import java.io.*;  
 import java.net.*;
 
-import thot_serveur.ServerThread;
-
 
 
 public class FirstServer extends AbstractServer{

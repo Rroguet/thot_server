@@ -10,8 +10,18 @@ import java.io.IOException;
 import java.io.File;
 import java.util.*;
 
+/**
+ * This class is used to read data from xml files.
+ * @author jules
+ * 
+ */
 public class getDataFromXML {
-		
+	/**
+	 * 	
+	 * @param filePath path of file to parse
+	 * @return
+	 * Parses the xml file given in parameter for further use.
+	 */
 	public static NodeList parseXMLFile (String filePath) {
 		NodeList elementNodes = null;
 		try {
@@ -24,7 +34,13 @@ public class getDataFromXML {
 		}
 		return elementNodes;
 	}
-	
+	/**
+	 * 
+	 * @param login login entered by user
+	 * @param passWord password entered by user
+	 * @return Utilisateur
+	 * Returns the user from XML file which corresponds to the given login and password 
+	 */
 	public static Utilisateur getUtilisateur(String login, String passWord){
 	    NodeList nodes = parseXMLFile(Constant.pathUserXML);
 	    if (nodes == null) return null;
@@ -42,9 +58,7 @@ public class getDataFromXML {
 	    					}
 	    					Utilisateur u = new Utilisateur(currentElement.getElementsByTagName("firstName").item(0).getTextContent(),
 	    										currentElement.getElementsByTagName("lastName").item(0).getTextContent(),
-	    										currentElement.getElementsByTagName("userName").item(0).getTextContent(),
-	    										Integer.parseInt(currentElement.getElementsByTagName("id").item(0).getTextContent()),
-	    										conv);
+	    										currentElement.getElementsByTagName("userName").item(0).getTextContent());
 	    					return u;
 	    				} catch (Exception ex) {}
 	    			}
@@ -53,8 +67,13 @@ public class getDataFromXML {
 	    }
 	    return null;
 	}
-	
-	public static Utilisateur getUserById(int userId){
+	/**
+	 * 
+	 * @param userId UUID of the user we want to get from XML file.
+	 * @return Utilisateur
+	 * Returns the user corresponding to a given UUID, if there is no such user, returns null
+	 */
+	public static Utilisateur getUserById(UUID userId){
 	    NodeList nodes = parseXMLFile(Constant.pathUserXML);
 	    if (nodes == null) return null;
 	    
@@ -62,17 +81,17 @@ public class getDataFromXML {
 			if (nodes.item(i).getNodeType() == Node.ELEMENT_NODE)   {
 				Element currentElement = (Element) nodes.item(i);
 	    		if (currentElement.getNodeName().equals("user")){
-	    			if(Integer.parseInt(currentElement.getElementsByTagName("id").item(0).getTextContent()) == userId) {
+	    			if(UUID.fromString(currentElement.getElementsByTagName("id").item(0).getTextContent()) == userId) {
 	    				try {
-	    					List<Integer> conv = new ArrayList<Integer>();
+	    					List<UUID> conv = new ArrayList<UUID>();
 	    					NodeList nodeConv = currentElement.getElementsByTagName("conversations").item(0).getChildNodes();
 	    					for (int j = 1; j<nodeConv.getLength(); j+=2) {
-	    						conv.add(Integer.parseInt(nodeConv.item(j).getTextContent()));
+	    						conv.add(UUID.fromString(nodeConv.item(j).getTextContent()));
 	    					}
 	    					Utilisateur u = new Utilisateur(currentElement.getElementsByTagName("firstName").item(0).getTextContent(),
 	    										currentElement.getElementsByTagName("lastName").item(0).getTextContent(),
 	    										currentElement.getElementsByTagName("userName").item(0).getTextContent(),
-	    										Integer.parseInt(currentElement.getElementsByTagName("id").item(0).getTextContent()),
+	    										userId,
 	    										conv);
 	    					return u;
 	    				} catch (Exception ex) {}
@@ -82,8 +101,13 @@ public class getDataFromXML {
 	    }
 	    return null;
 	}
-	
-	public static Conversation getConvById(int convId) {
+	/**
+	 * 
+	 * @param convId UUID of the conversation we want to read from XML.
+	 * @return Conversation
+	 * Returns the conversation corresponding to the given UUID, if there is no such conversation, returns null.
+	 */
+	public static Conversation getConvById(UUID convId) {
 		List<Utilisateur> userList;
 		List<Message> msgList;
 		NodeList nodes = parseXMLFile(Constant.pathConvXML);
@@ -94,7 +118,7 @@ public class getDataFromXML {
 				Element currentElement = (Element) nodes.item(i);
 	    		if (currentElement.getNodeName().equals("conv")){
 	    			Conversation conv;
-	    			if(Integer.parseInt(currentElement.getElementsByTagName("idConv").item(0).getTextContent())==convId) {
+	    			if(UUID.fromString(currentElement.getElementsByTagName("idConv").item(0).getTextContent())==convId) {
 	    				try {
 	    					
 	    					msgList = new ArrayList<Message>();
@@ -105,9 +129,9 @@ public class getDataFromXML {
 	    	                	Node node = nodeMsg.item(j);
                                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                                 	Element message = (Element) node;
-	    	                        String utilisateur = message.getElementsByTagName("utilisateur").item(0).getTextContent();
+	    	                        String utilisateurId = message.getElementsByTagName("utilisateur").item(0).getTextContent();
 	    	                        String text = message.getElementsByTagName("text").item(0).getTextContent();
-	    	                        Message msg = new Message(Integer.parseInt(utilisateur), text);
+	    	                        Message msg = new Message(UUID.fromString(utilisateurId), text);
 	    	                        msgList.add(msg);
 	    	                    }
 	    	                } 
@@ -118,13 +142,13 @@ public class getDataFromXML {
 	    						if (node.getNodeType() == Node.ELEMENT_NODE) {
 	    							Element user = (Element) node;
 	    							String userTagContent = (user.getTextContent());
-	    							int userId = Integer.parseInt(userTagContent);
+	    							UUID userId = UUID.fromString(userTagContent);
 	    							userList.add(getUserById(userId));
 	    						}
 	    					}
 	    					conv = new Conversation(convId,
 	    										currentElement.getElementsByTagName("nameConv").item(0).getTextContent(),
-	    										Integer.parseInt(currentElement.getElementsByTagName("idCreateur").item(0).getTextContent()),
+	    										UUID.fromString(currentElement.getElementsByTagName("idCreateur").item(0).getTextContent()),
 	    										msgList,
 	    										userList);
 	    					return conv;
@@ -135,26 +159,41 @@ public class getDataFromXML {
 	    }
 	    return null;
 	}
-	
+	/**
+	 * 
+	 * @param u user object from which we want the conversation list.
+	 * @return List of conversation
+	 * For a given user, return the list of conversations he participates in.
+	 */
 	public static List<Conversation> getConvListOfUser(Utilisateur u){
 		List<Conversation> convList = new ArrayList<Conversation>();
-		for (Integer i : u.getConversationList()) {
+		for (UUID i : u.getConversationList()) {
 			convList.add(getConvById(i));
 		}
 		return convList;
 	}
-	
+	/**
+	 * 
+	 * @param u user object from which we want the names of conversations he participates in.
+	 * @return List of names
+	 * For a given user, return the list of names of the conversations he participates in.
+	 */
 	public static List<String> getConvNamesOfUser(Utilisateur u){
 		List<String> convNames = new ArrayList<String>();
-		for (Integer i : u.getConversationList()) {
+		for (UUID i : u.getConversationList()) {
 			convNames.add(getConvById(i).getName());
 		}
 		return convNames;
 	}
-	
-	public static List<Utilisateur> getUserListFromIdList(List<Integer> userIdList){
+	/**
+	 * 
+	 * @param userIdList ID list that we use to find corresponding users.
+	 * @return List of users
+	 * For a given UUID list, returns the corresponding list of users.
+	 */
+	public static List<Utilisateur> getUserListFromIdList(List<UUID> userIdList){
 		List<Utilisateur> userList = new ArrayList<Utilisateur>();
-		for (Integer i : userIdList) {
+		for (UUID i : userIdList) {
 			userList.add(getUserById(i));
 		}
 		return userList;

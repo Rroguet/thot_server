@@ -1,18 +1,24 @@
 package presentation.model;
 
 import java.io.Serializable;
-
+import java.util.UUID;
+/**
+ * Message
+ * @author jules
+ * 
+ */
+@SuppressWarnings("serial")
 public class Message implements Serializable{
-	private int utilisateurId;
+	private UUID utilisateurId;
 	private String message;
 	//private Date date;
 	
-	public Message(int utilisateurId, String message) {
+	public Message(UUID utilisateurId, String message) {
 		this.utilisateurId = utilisateurId;
 		this.message = message;
 	}
 	
-	public int getUtilisateur() {
+	public UUID getUtilisateur() {
 		return utilisateurId;
 	}
 	

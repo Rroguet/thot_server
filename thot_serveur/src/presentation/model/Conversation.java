@@ -48,7 +48,9 @@ public class Conversation implements Serializable{
 	public List<Message> getMessage(){
 		return messages;
 	}
-	
+	public List<Utilisateur> getUserList() {
+		return utilisateurs;
+	}
 	public void addUser(Utilisateur u) {
 		utilisateurs.add(u);
 	}

@@ -79,8 +79,13 @@ public class writeDataToXML {
 	 * @param login login for the new user.
 	 * @param passWord password for the new user.
 	 * Adds a newly created user to userXML.
+	 * Tests if such a user already exists before writing in XML.
 	 */
-	public static void newUser(Utilisateur u, String login, String passWord) {
+	public static boolean newUser(Utilisateur u, String login, String passWord) {
+		//If username is already used, return false.
+		//If password is already used, return false.
+		if(getDataFromXML.getUserByUname(u.getUserName())!= null) return false;
+		if(getDataFromXML.checkForPassWord(passWord)) return false;
 		try{
 		      Document document = Singletons.getDocumentBuilder().parse(new File(Constant.pathUserXML));
 		      Element root = document.getDocumentElement();
@@ -117,11 +122,11 @@ public class writeDataToXML {
 		      root.appendChild(utilisateur);
 		      	      
 		      createXMLFile(document,Constant.pathUserXML);
-		      return;
 
 		    }catch (SAXException e){
 		    }catch (IOException e){
 		    }
+		return true;
 	}
 	
 	/**
@@ -130,13 +135,15 @@ public class writeDataToXML {
 	 * @param convId ID of the conversation we want to add to the user's convList.
 	 * In userXML file, adds a specific conversation to the conversation list of a user.
 	 */
-	public static void addUserToConversationUserXML(UUID userId, UUID convId) {
+	public static boolean addConvToUserConvList(UUID userId, UUID convId) {
+		//return false if the conversation is already in the user's convList
+		if(getDataFromXML.getUserById(userId).getConversationList().contains(convId)) return false;
 		try{
 			Document document = Singletons.getDocumentBuilder().parse(new File(Constant.pathUserXML));
 		    Element root = document.getDocumentElement();
 		      
 		    NodeList nodes = root.getChildNodes();
-		    if (nodes == null) return;
+		    if (nodes == null) return false;
 		     
 		    for (int i = 0; i<nodes.getLength(); i++) {
 		    	if (nodes.item(i).getNodeType() == Node.ELEMENT_NODE)   {
@@ -148,7 +155,7 @@ public class writeDataToXML {
 		      	      	currentElement.getElementsByTagName("conversations").item(0).appendChild(conversation);
 		      	      
 		      	      	createXMLFile(document,Constant.pathUserXML);
-		      	      	return;
+		      	      	return true;
 		            }
 		          }
 		      }
@@ -156,20 +163,23 @@ public class writeDataToXML {
 		    }catch (SAXException e){
 		    }catch (IOException e){
 		    }
+		return false;
 	}
 	/**
 	 * 
 	 * @param userId ID of the user to be added in conversation participants.
-	 * @param convId ID of correspondant conversation.
+	 * @param convId ID of matching conversation.
 	 * For a specific conversation, adds a user to it's list of participants in convXML file.
 	 */
-	public static void addUserToConversationConvXML(UUID userId, UUID convId) {
+	public static boolean addUserToConversationUserList(UUID userId, UUID convId) {
+		//Return false if the user is already in the conversation's userList
+		if(getDataFromXML.getConvById(convId).getUserList().contains(userId)) return false;
 		try{
 			Document document = Singletons.getDocumentBuilder().parse(new File(Constant.pathConvXML));
 		    Element root = document.getDocumentElement();
 		      
 		    NodeList nodes = root.getChildNodes();
-		    if (nodes == null) return;
+		    if (nodes == null) return false;
 		     
 		    for (int i = 0; i<nodes.getLength(); i++) {
 		    	if (nodes.item(i).getNodeType() == Node.ELEMENT_NODE)   {
@@ -181,7 +191,7 @@ public class writeDataToXML {
 		      	      	currentElement.getElementsByTagName("utilisateurs").item(0).appendChild(utilisateur);
 		      	      
 		      	      	createXMLFile(document,Constant.pathConvXML);
-		      	      	return;
+		      	      	return true;
 		            }
 		          }
 		      }
@@ -189,6 +199,7 @@ public class writeDataToXML {
 		    }catch (SAXException e){
 		    }catch (IOException e){
 		    }
+		return false;
 	}
 	
 	/**
@@ -196,10 +207,11 @@ public class writeDataToXML {
 	 * @param userId UUID of the user added to the conversation.
 	 * @param convId UUID of the conversation.
 	 * Performs necessary actions when a user is added to a conversation.
+	 * returns false if the user is already in the conversation.
 	 */
-	public static void addUserToConversation(UUID userId, UUID convId) {
-		addUserToConversationUserXML(userId,convId);
-		addUserToConversationConvXML(userId,convId);
+	public static boolean addUserToConversation(UUID userId, UUID convId) {
+		if(!addConvToUserConvList(userId,convId) || !addUserToConversationUserList(userId,convId)) return false;
+		return true;
 	}
 	/**
 	 * 

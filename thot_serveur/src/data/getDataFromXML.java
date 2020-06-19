@@ -107,6 +107,61 @@ public class getDataFromXML {
 	    return null;
 	}
 	/**
+	 * If existing, returns the user corresponding to userName in parameter, if no return null.
+	 * @param unserName username of the user we want to recover.
+	 * @return Utilisateur , the user corresponding to parameter userName.
+	 */
+	public static Utilisateur getUserByUname(String userName){
+	    NodeList nodes = parseXMLFile(Constant.pathUserXML);
+	    if (nodes == null) return null;
+	    
+		for (int i = 0; i<nodes.getLength(); i++) {
+			if (nodes.item(i).getNodeType() == Node.ELEMENT_NODE)   {
+				Element currentElement = (Element) nodes.item(i);
+	    		if (currentElement.getNodeName().equals("user")){
+	    			if(currentElement.getElementsByTagName("userName").item(0).getTextContent().equals(userName)) {
+	    				try {
+	    					UUID userId = UUID.fromString(currentElement.getElementsByTagName("id").item(0).getTextContent());
+	    					List<UUID> conv = new ArrayList<UUID>();
+	    					NodeList nodeConv = currentElement.getElementsByTagName("conversations").item(0).getChildNodes();
+	    					for (int j = 1; j<nodeConv.getLength(); j+=2) {
+	    						conv.add(UUID.fromString(nodeConv.item(j).getTextContent()));
+	    					}
+	    					Utilisateur u = new Utilisateur(currentElement.getElementsByTagName("firstName").item(0).getTextContent(),
+	    										currentElement.getElementsByTagName("lastName").item(0).getTextContent(),
+	    										currentElement.getElementsByTagName("userName").item(0).getTextContent(),
+	    										userId,
+	    										conv);
+	    					return u;
+	    				} catch (Exception ex) {}
+	    			}
+	    		}
+	    	}
+	    }
+	    return null;
+	}
+	/**
+	 * Checks whether a given password is already used by a user.
+	 * @param passWord passWord to be checked
+	 * @return boolean returns true if password exists in xml.
+	 */
+	public static boolean checkForPassWord(String passWord) {
+		NodeList nodes = parseXMLFile(Constant.pathUserXML);
+	    if (nodes == null) return false;
+	    
+		for (int i = 0; i<nodes.getLength(); i++) {
+			if (nodes.item(i).getNodeType() == Node.ELEMENT_NODE)   {
+				Element currentElement = (Element) nodes.item(i);
+	    		if (currentElement.getNodeName().equals("user")){
+	    			if(currentElement.getElementsByTagName("passWord").item(0).getTextContent().equals(passWord)) {
+	    				return true;
+	    			}
+	    		}
+	    	}
+	    }
+		return false;
+	}
+	/**
 	 * 
 	 * @param convId UUID of the conversation we want to read from XML.
 	 * @return Conversation

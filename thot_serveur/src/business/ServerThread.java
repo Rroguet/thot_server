@@ -104,8 +104,8 @@ public class ServerThread extends Thread {
     		String passWord = (String)input.readObject();
     		Utilisateur u = (Utilisateur) input.readObject();
 		
-    		writeDataToXML.newUser(u, login, passWord);
-    		output.writeObject(true);
+    		//Outputs true if user was created successfully.
+    		output.writeObject(writeDataToXML.newUser(u, login, passWord));
     		System.out.println("new user saved");
     	} catch (IOException ex) {
     		System.out.println("Server exception: " + ex.getMessage());
@@ -143,9 +143,9 @@ public class ServerThread extends Thread {
     		UUID userId = (UUID)input.readObject();
     		UUID convId = (UUID)input.readObject();
 		
-    		writeDataToXML.addUserToConversation(userId, convId);
-    		output.writeObject(true);
-    		System.out.println("user added to conversation");
+    		//Outputs true if user was successfully added to conversation.
+    		output.writeObject(writeDataToXML.addUserToConversation(userId, convId));
+    		//System.out.println("user added to conversation"); REPLACE WITH LOGS
     	} catch (IOException ex) {
     		System.out.println("Server exception: " + ex.getMessage());
     		ex.printStackTrace();

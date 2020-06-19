@@ -57,16 +57,4 @@ public class Conversation implements Serializable{
 		messages.add(new Message(u.getId(),m));
 	}
 	
-	public void removeUser(Utilisateur u) {
-		
-	}
-	
-	public void removeMessage(Message m) {
-		
-	}
-
-	public void setName(String nameConv) {
-		this.nameConv=nameConv;
-	}
-
 }

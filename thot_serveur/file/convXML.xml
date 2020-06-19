@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><conversations>
 	<conv>
-		<idConv>1</idConv>
+		<idConv>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a25</idConv>
 		<nameConv>nom conv 1</nameConv>
-		<idCreateur>1</idCreateur>
+		<idCreateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</idCreateur>
 		<messages>
 			<message>
-				<utilisateur>1</utilisateur>
+				<utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur>
 				<text>bonjour de 1</text>
 			</message>
 			<message>
-				<utilisateur>2</utilisateur>
+				<utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur>
 				<text>bonjour de 2</text>
 			</message>
 			<message>
-				<utilisateur>1</utilisateur>
+				<utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur>
 				<text>reponse de 1</text>
 			</message>
 			<message>
-				<utilisateur>1</utilisateur>
+				<utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur>
 				<text>test test test</text>
 			</message>
 		</messages>
 		<utilisateurs>
-			<utilisateur>1</utilisateur>
-			<utilisateur>2</utilisateur>
-			<utilisateur>3</utilisateur>
-			<utilisateur>3</utilisateur>
+			<utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur>
+			<utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12</utilisateur>
+			<utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a19</utilisateur>
+			
 		</utilisateurs>
 	</conv> 
 </conversations>

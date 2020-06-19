@@ -66,6 +66,7 @@ public class ServerThread extends Thread {
     		System.out.println("server received a pass word:" + passWord);
 		
     		Utilisateur u = getDataFromXML.getUtilisateur(login, passWord);
+    		System.out.println("user info:" + u.getFirstName()+", "+u.getUserName());
     		output.writeObject(u);
     		
     	} catch (IOException ex) {

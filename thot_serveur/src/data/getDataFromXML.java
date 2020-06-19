@@ -51,14 +51,18 @@ public class getDataFromXML {
 	    		if (currentElement.getNodeName().equals("user")){
 	    			if(currentElement.getElementsByTagName("login").item(0).getTextContent().equals(login)&&currentElement.getElementsByTagName("passWord").item(0).getTextContent().equals(passWord)) {
 	    				try {
-	    					List<Integer> conv = new ArrayList<Integer>();
+	    					List<UUID> conv = new ArrayList<UUID>();
+	    					String userIdString = currentElement.getElementsByTagName("id").item(0).getTextContent();
+	    					UUID userId = UUID.fromString(userIdString);
 	    					NodeList nodeConv = currentElement.getElementsByTagName("conversations").item(0).getChildNodes();
 	    					for (int j = 1; j<nodeConv.getLength(); j+=2) {
-	    						conv.add(Integer.parseInt(nodeConv.item(j).getTextContent()));
+	    						conv.add(UUID.fromString(nodeConv.item(j).getTextContent()));
 	    					}
 	    					Utilisateur u = new Utilisateur(currentElement.getElementsByTagName("firstName").item(0).getTextContent(),
 	    										currentElement.getElementsByTagName("lastName").item(0).getTextContent(),
-	    										currentElement.getElementsByTagName("userName").item(0).getTextContent());
+	    										currentElement.getElementsByTagName("userName").item(0).getTextContent(),
+	    										userId,
+	    										conv);
 	    					return u;
 	    				} catch (Exception ex) {}
 	    			}
@@ -81,7 +85,8 @@ public class getDataFromXML {
 			if (nodes.item(i).getNodeType() == Node.ELEMENT_NODE)   {
 				Element currentElement = (Element) nodes.item(i);
 	    		if (currentElement.getNodeName().equals("user")){
-	    			if(UUID.fromString(currentElement.getElementsByTagName("id").item(0).getTextContent()) == userId) {
+	    			UUID readUserId = UUID.fromString(currentElement.getElementsByTagName("id").item(0).getTextContent());
+	    			if(readUserId.equals(userId)) {
 	    				try {
 	    					List<UUID> conv = new ArrayList<UUID>();
 	    					NodeList nodeConv = currentElement.getElementsByTagName("conversations").item(0).getChildNodes();
@@ -118,7 +123,7 @@ public class getDataFromXML {
 				Element currentElement = (Element) nodes.item(i);
 	    		if (currentElement.getNodeName().equals("conv")){
 	    			Conversation conv;
-	    			if(UUID.fromString(currentElement.getElementsByTagName("idConv").item(0).getTextContent())==convId) {
+	    			if(UUID.fromString(currentElement.getElementsByTagName("idConv").item(0).getTextContent()).equals(convId)) {
 	    				try {
 	    					
 	    					msgList = new ArrayList<Message>();

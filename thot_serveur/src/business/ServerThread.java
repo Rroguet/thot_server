@@ -61,12 +61,9 @@ public class ServerThread extends Thread {
     public void login() {
     	try {
     		String login = (String)input.readObject();  //read the object received through the stream and deserialize it
-    		System.out.println("server received a login:" + login);
     		String passWord = (String)input.readObject();  //read the object received through the stream and deserialize it
-    		System.out.println("server received a pass word:" + passWord);
 		
     		Utilisateur u = getDataFromXML.getUtilisateur(login, passWord);
-    		System.out.println("user info:" + u.getFirstName()+", "+u.getUserName());
     		output.writeObject(u);
     		
     	} catch (IOException ex) {

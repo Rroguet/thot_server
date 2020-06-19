@@ -168,7 +168,7 @@ public class getDataFromXML {
 	 * Returns the conversation corresponding to the given UUID, if there is no such conversation, returns null.
 	 */
 	public static Conversation getConvById(UUID convId) {
-		List<Utilisateur> userList;
+		List<UUID> userList;
 		List<Message> msgList;
 		NodeList nodes = parseXMLFile(Constant.pathConvXML);
 		if (nodes == null) return null;
@@ -182,7 +182,7 @@ public class getDataFromXML {
 	    				try {
 	    					
 	    					msgList = new ArrayList<Message>();
-	    					userList = new ArrayList<Utilisateur>();
+	    					userList = new ArrayList<UUID>();
 	    					//Block filling the message list of the conversation
 	    	                NodeList nodeMsg = currentElement.getElementsByTagName("messages").item(0).getChildNodes();
 	    	                for (int j=0;j<nodeMsg.getLength();j++) {
@@ -203,7 +203,7 @@ public class getDataFromXML {
 	    							Element user = (Element) node;
 	    							String userTagContent = (user.getTextContent());
 	    							UUID userId = UUID.fromString(userTagContent);
-	    							userList.add(getUserById(userId));
+	    							userList.add(userId);
 	    						}
 	    					}
 	    					conv = new Conversation(convId,

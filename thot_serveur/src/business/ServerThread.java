@@ -1,6 +1,7 @@
 package business;
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import data.writeDataToXML;
@@ -39,7 +40,7 @@ public class ServerThread extends Thread {
 				if(action.equals("addUser")) addUser();
 				if(action.equals("getConvNames")) getUserConvNameList();
 				if(action.equals("getConv")) getSelectedConvById();
-				if(action.equals("getUsersNames")) getUsersNames();
+				if(action.equals("getMembers")) getUsersNames();
 			} while (socket.isConnected());
 			
         } catch (IOException ex) {
@@ -195,5 +196,21 @@ public class ServerThread extends Thread {
      */
     public void getUsersNames() {
     	//TODO output the list of all users' names.
+    	try {
+    		@SuppressWarnings("unchecked")
+			List<UUID> usersId = (List<UUID>)input.readObject();
+    		List<String> usersNames = new ArrayList<String>();
+    		for (UUID i : usersId) {
+    			usersNames.add(getDataFromXML.getUserById(i).getUserName());
+    		}
+    		output.writeObject(usersNames);
+    	} catch (IOException ex) {
+    		System.out.println("Server exception: " + ex.getMessage());
+    		ex.printStackTrace();
+
+    	} catch (ClassNotFoundException ex) {
+    		System.out.println("Server exception: " + ex.getMessage());
+    		ex.printStackTrace();
+    	}
     }
 }

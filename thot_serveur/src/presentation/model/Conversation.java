@@ -14,18 +14,18 @@ public class Conversation implements Serializable{
 	 */
 	private UUID convId;
 	private List<Message> messages;
-	private List<Utilisateur> utilisateurs;
+	private List<UUID> utilisateurs;
 	private String nameConv;
 	private UUID createur;
 
-	public Conversation(String nameConv, UUID createur, List<Message> messages, List<Utilisateur> utilisateurs) {
+	public Conversation(String nameConv, UUID createur, List<Message> messages, List<UUID> utilisateurs) {
 		convId = UUID.randomUUID();
 		this.nameConv = nameConv;
 		this.createur = createur;
 		this.messages = messages;
 		this.utilisateurs = utilisateurs;
 	}
-	public Conversation(UUID convId, String nameConv, UUID createur, List<Message> messages, List<Utilisateur> utilisateurs) {
+	public Conversation(UUID convId, String nameConv, UUID createur, List<Message> messages, List<UUID> utilisateurs) {
 		this.convId = convId;
 		this.nameConv = nameConv;
 		this.createur = createur;
@@ -48,11 +48,8 @@ public class Conversation implements Serializable{
 	public List<Message> getMessage(){
 		return messages;
 	}
-	public List<Utilisateur> getUserList() {
+	public List<UUID> getUserList() {
 		return utilisateurs;
-	}
-	public void addUser(Utilisateur u) {
-		utilisateurs.add(u);
 	}
 	
 	public void newMessage(String m, Utilisateur u, int idConv) {

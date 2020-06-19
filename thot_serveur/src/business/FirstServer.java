@@ -4,10 +4,16 @@ import java.io.*;
 import java.net.*;
 
 
-
+/**
+ * Starts server and waits for connection
+ * @author jules
+ * 
+ */
 public class FirstServer extends AbstractServer{
 	private ServerSocket ss;
-	
+	/**
+	 * Allows connection to the server.
+	 */
 	public void connect(String ip) {
 		try {
 			//the server socket is defined only by a port (its IP is localhost)

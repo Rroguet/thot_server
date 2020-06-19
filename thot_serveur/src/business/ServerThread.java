@@ -1,13 +1,16 @@
 package business;
 import java.io.*;
 import java.net.*;
-import java.util.ArrayList;
 import java.util.List;
-
+import java.util.UUID;
 import data.writeDataToXML;
 import data.getDataFromXML;
 import presentation.model.*;
-
+/**
+ * Serverside class handling received action from the client.
+ * @author jules
+ * 
+ */
 public class ServerThread extends Thread {
     private Socket socket;
 	private ObjectInputStream input;
@@ -15,7 +18,9 @@ public class ServerThread extends Thread {
 	public ServerThread(Socket socket) {
         this.socket = socket;
     }
- 
+	/**
+	 * As long as the server is connected, handles actions coming from the user.
+	 */
     public void run() {
         try {
 			//create the streams that will handle the objects coming through the sockets
@@ -50,7 +55,9 @@ public class ServerThread extends Thread {
 			}
 		}
     }
-    
+    /**
+     * Reads input from user login and outputs corresponding user info to the stream.
+     */
     public void login() {
     	try {
     		String login = (String)input.readObject();  //read the object received through the stream and deserialize it
@@ -59,6 +66,7 @@ public class ServerThread extends Thread {
     		System.out.println("server received a pass word:" + passWord);
 		
     		Utilisateur u = getDataFromXML.getUtilisateur(login, passWord);
+    		System.out.println("user info:" + u.getFirstName()+", "+u.getUserName());
     		output.writeObject(u);
     		
     	} catch (IOException ex) {
@@ -70,7 +78,9 @@ public class ServerThread extends Thread {
     		ex.printStackTrace();
     	}
     }
-    
+    /**
+     * Reads input message from user and stores message in XML.
+     */
     public void newMessage() {
     	try {
     		Message m = (Message) input.readObject();  
@@ -88,7 +98,9 @@ public class ServerThread extends Thread {
     		ex.printStackTrace();
     	}
     }
-    
+    /**
+     * Reads info for a new user, then adds it into userXML.
+     */
     public void newUser() {
     	try {
     		String login = (String)input.readObject();
@@ -107,7 +119,9 @@ public class ServerThread extends Thread {
     		ex.printStackTrace();
     	}
     }
-    
+    /**
+     * Reads info for a new conversation, then adds it to conversation XML.
+     */
     public void newConv() {
     	try {
     		Conversation c = (Conversation)input.readObject();
@@ -124,11 +138,13 @@ public class ServerThread extends Thread {
     		ex.printStackTrace();
     	}
     }
-    
+    /**
+     * Reads a userID and a convID, then adds the user to the conversation's user list.
+     */
     public void addUser() {
     	try {
-    		int userId = (int)input.readObject();
-    		int convId = (int)input.readObject();
+    		UUID userId = (UUID)input.readObject();
+    		UUID convId = (UUID)input.readObject();
 		
     		writeDataToXML.addUserToConversation(userId, convId);
     		output.writeObject(true);
@@ -142,10 +158,12 @@ public class ServerThread extends Thread {
     		ex.printStackTrace();
     	}
     }
-    
+    /**
+     * Reads a userId, then outputs corresponding user's list of conversations' names to the stream.
+     */
     public void getUserConvNameList() {
     	try {
-    		int userId = (int)input.readObject();
+    		UUID userId = (UUID)input.readObject();
     		Utilisateur u = getDataFromXML.getUserById(userId);
     		List<String> convNames = getDataFromXML.getConvNamesOfUser(u);
     		output.writeObject(convNames);
@@ -158,10 +176,12 @@ public class ServerThread extends Thread {
     		ex.printStackTrace();
     	}
     }
-    
+    /**
+     * Reads a conversation ID, then outputs corresponding conversation object to the stream.
+     */
     public void getSelectedConvById() {
     	try {
-    		int convId = (int)input.readObject();
+    		UUID convId = (UUID)input.readObject();
     		Conversation conv = getDataFromXML.getConvById(convId);
     		output.writeObject(conv);
     	} catch (IOException ex) {
@@ -173,7 +193,9 @@ public class ServerThread extends Thread {
     		ex.printStackTrace();
     	}
     }
-    
+    /**
+     * Reads a conversation ID, then outputs the names of every user participating in the conversation.
+     */
     public void getUsersNames() {
     	//TODO output the list of all users' names.
     }

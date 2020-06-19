@@ -2,20 +2,30 @@ package presentation.model;
 
 import java.io.Serializable;
 import java.util.*;
-
+/**
+ * Stores Conversation necessary attributes
+ * @author jules
+ * 
+ */
+@SuppressWarnings("serial")
 public class Conversation implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	//private UUID convId
-	private int convId;
+	private UUID convId;
 	private List<Message> messages;
 	private List<Utilisateur> utilisateurs;
 	private String nameConv;
-	private int createur;
+	private UUID createur;
 
-	public Conversation(int convId, String nameConv, int createur, List<Message> messages, List<Utilisateur> utilisateurs) {
+	public Conversation(String nameConv, UUID createur, List<Message> messages, List<Utilisateur> utilisateurs) {
+		convId = UUID.randomUUID();
+		this.nameConv = nameConv;
+		this.createur = createur;
+		this.messages = messages;
+		this.utilisateurs = utilisateurs;
+	}
+	public Conversation(UUID convId, String nameConv, UUID createur, List<Message> messages, List<Utilisateur> utilisateurs) {
 		this.convId = convId;
 		this.nameConv = nameConv;
 		this.createur = createur;
@@ -23,7 +33,7 @@ public class Conversation implements Serializable{
 		this.utilisateurs = utilisateurs;
 	}
 	
-	public int getConvId() {
+	public UUID getConvId() {
 		return convId;
 	}
 	
@@ -31,7 +41,7 @@ public class Conversation implements Serializable{
 		return nameConv;
 	}
 	
-	public int getCreateur() {
+	public UUID getCreateur() {
 		return createur;
 	}
 	
@@ -47,16 +57,4 @@ public class Conversation implements Serializable{
 		messages.add(new Message(u.getId(),m));
 	}
 	
-	public void removeUser(Utilisateur u) {
-		
-	}
-	
-	public void removeMessage(Message m) {
-		
-	}
-
-	public void setName(String nameConv) {
-		this.nameConv=nameConv;
-	}
-
 }

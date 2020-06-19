@@ -10,9 +10,15 @@ import org.xml.sax.SAXException;
 
 import org.w3c.dom.*;
 import java.io.IOException;
+import java.util.UUID;
 import java.io.File;
 
-
+/**
+ * This class is used to write data in XML files.
+ * It performs actions such as writing newly creating users or conversations, and adding sent messages to conversationXML.
+ * @author jules
+ * 
+ */
 public class writeDataToXML {
 	
 	public static void createXMLFile(Document document, String filePath){
@@ -27,7 +33,12 @@ public class writeDataToXML {
             tfe.printStackTrace();
         }
 	}
-	
+	/**
+	 * 
+	 * @param m Message we want to write in XML file.
+	 * @param idConv
+	 * Adds a message to convXML after it's been sent.
+	 */
 	public static void newMessage(Message m, int idConv) {
 	    try{
 	      Document document = Singletons.getDocumentBuilder().parse(new File(Constant.pathConvXML));
@@ -42,18 +53,18 @@ public class writeDataToXML {
 	            if(currentElement.getElementsByTagName("idConv").item(0).getTextContent().equals(String.valueOf(idConv))){
 	            	Element message = document.createElement("message");
 
-	      	      Element userMessage = document.createElement("utilisateur");
-	      	      userMessage.appendChild(document.createTextNode(String.valueOf(m.getUtilisateur())));
-	      	      message.appendChild(userMessage);
+	            	Element userMessage = document.createElement("utilisateur");
+	            	userMessage.appendChild(document.createTextNode(String.valueOf(m.getUtilisateur())));
+	            	message.appendChild(userMessage);
 
-	      	      Element textMessage = document.createElement("text");
-	      	      textMessage.appendChild(document.createTextNode(m.getMessage()));
-	      	      message.appendChild(textMessage);
+	            	Element textMessage = document.createElement("text");
+	            	textMessage.appendChild(document.createTextNode(m.getMessage()));
+	            	message.appendChild(textMessage);
 
-	      	      currentElement.getElementsByTagName("messages").item(0).appendChild(message);
+	            	currentElement.getElementsByTagName("messages").item(0).appendChild(message);
 	      	      
-	      	      createXMLFile(document,Constant.pathConvXML);
-	      	      return;
+	            	createXMLFile(document,Constant.pathConvXML);
+	            	return;
 	            }
 	          }
 	      }
@@ -62,7 +73,13 @@ public class writeDataToXML {
 	    }catch (IOException e){
 	    }
 	}
-	
+	/**
+	 * 
+	 * @param u User object we want to add to XML.
+	 * @param login login for the new user.
+	 * @param passWord password for the new user.
+	 * Adds a newly created user to userXML.
+	 */
 	public static void newUser(Utilisateur u, String login, String passWord) {
 		try{
 		      Document document = Singletons.getDocumentBuilder().parse(new File(Constant.pathUserXML));
@@ -107,8 +124,13 @@ public class writeDataToXML {
 		    }
 	}
 	
-	
-	public static void addUserToConversationUserXML(int userId, int convId) {
+	/**
+	 * 
+	 * @param userId ID of the user.
+	 * @param convId ID of the conversation we want to add to the user's convList.
+	 * In userXML file, adds a specific conversation to the conversation list of a user.
+	 */
+	public static void addUserToConversationUserXML(UUID userId, UUID convId) {
 		try{
 			Document document = Singletons.getDocumentBuilder().parse(new File(Constant.pathUserXML));
 		    Element root = document.getDocumentElement();
@@ -135,8 +157,13 @@ public class writeDataToXML {
 		    }catch (IOException e){
 		    }
 	}
-	
-	public static void addUserToConversationConvXML(int userId, int convId) {
+	/**
+	 * 
+	 * @param userId ID of the user to be added in conversation participants.
+	 * @param convId ID of correspondant conversation.
+	 * For a specific conversation, adds a user to it's list of participants in convXML file.
+	 */
+	public static void addUserToConversationConvXML(UUID userId, UUID convId) {
 		try{
 			Document document = Singletons.getDocumentBuilder().parse(new File(Constant.pathConvXML));
 		    Element root = document.getDocumentElement();
@@ -164,12 +191,21 @@ public class writeDataToXML {
 		    }
 	}
 	
-	
-	public static void addUserToConversation(int userId, int convId) {
+	/**
+	 * 
+	 * @param userId UUID of the user added to the conversation.
+	 * @param convId UUID of the conversation.
+	 * Performs necessary actions when a user is added to a conversation.
+	 */
+	public static void addUserToConversation(UUID userId, UUID convId) {
 		addUserToConversationUserXML(userId,convId);
 		addUserToConversationConvXML(userId,convId);
 	}
-	
+	/**
+	 * 
+	 * @param c conversation object that will be added to XML.
+	 * Adds the conversation in parameter to conversationXML.
+	 */
 	public static void newConv(Conversation c) {
 		try{
 		      Document document = Singletons.getDocumentBuilder().parse(new File(Constant.pathConvXML));

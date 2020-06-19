@@ -4,10 +4,9 @@
 		<passWord>test1</passWord>
 		<firstName>f1</firstName><lastName>l1</lastName>
 		<userName>un1</userName>
-		<id>1</id>
+		<id>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</id>
 		<conversations>
-			<conversation>4</conversation>
-			<conversation>2</conversation>
+			<conversation>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a25</conversation>
 		</conversations> 
 	</user>
 	<user>
@@ -16,9 +15,9 @@
 		<firstName>f2</firstName>
 		<lastName>l2</lastName>
 		<userName>un2</userName>
-		<id>2</id>
+		<id>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12</id>
 		<conversations>
-			<conversation>1</conversation>
+			<conversation>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a25</conversation>
 		</conversations>
 	</user>
 	<user>
@@ -27,11 +26,9 @@
 		<firstName>f3</firstName>
 		<lastName>l3</lastName>
 		<userName>u3</userName>
-		<id>3</id>
+		<id>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a19</id>
 		<conversations>
-			<conversation>1</conversation>
-			<conversation>1</conversation>
-			<conversation>1</conversation>
-		<conversation>1</conversation></conversations>
+			<conversation>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a25</conversation>
+		</conversations>
 	</user>
 </users>

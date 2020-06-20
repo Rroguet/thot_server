@@ -21,6 +21,7 @@ public class FirstServer extends AbstractServer{
 			//the server socket is defined only by a port (its IP is localhost)
 			ss = new ServerSocket (6667);  
 			Singletons.getlogsWriter().write("Server waiting for connection...\n");
+			System.out.println("Server waiting for connection...");
 			while (true) {
 				Socket socket = ss.accept();//establishes connection 
 				Singletons.getlogsWriter().write("Connected as " + ip+"\n");	

@@ -1,19 +1,27 @@
 package data;
 
-import presentation.model.*;
-import singletons.Singletons;
-
-import javax.xml.transform.*;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import org.xml.sax.SAXException;
-
-import org.w3c.dom.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.UUID;
-import java.io.File;
-import java.io.FileNotFoundException;
+
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import presentation.model.Conversation;
+import presentation.model.Message;
+import presentation.model.Utilisateur;
+import singletons.Singletons;
 
 /**
  * This class is used to write data in XML files.
@@ -130,7 +138,7 @@ public class writeDataToXML {
 		    }catch (SAXException e){
 		    }catch (IOException e){
 		    }
-		return true;
+			return newConv(new Conversation("Default", u.getId(), null, null));
 	}
 	
 	/**

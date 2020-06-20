@@ -57,7 +57,6 @@ public class ServerThread extends Thread {
 			try {
 				output.close();
 				input.close();
-				Singletons.getlogsWriter().close();
 			} catch (IOException ioe) {
 			}
 		}

@@ -1,29 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><conversations>
 	<conv>
 		<idConv>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a25</idConv>
-		<nameConv>nom conv 1</nameConv>
+		<nameConv>Default Conversation</nameConv>
 		<idCreateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</idCreateur>
 		<messages>
 			<message>
 				<utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur>
-				<text>bonjour de 1</text>
+				<text>Default msg1</text>
 			</message>
-			<message>
-				<utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12</utilisateur>
-				<text>bonjour de 2</text>
-			</message>
-			<message>
-				<utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur>
-				<text>reponse de 1</text>
-			</message>
-			<message>
-				<utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur>
-				<text>test test test</text>
-			</message>
-		<message><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur><text>blabla</text></message><message><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12</utilisateur><text>coucou</text></message><message><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur><text>hello</text></message></messages>
+		</messages>	
 		<utilisateurs>
 			<utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur>
-			<utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12</utilisateur>
-			
-		<utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a19</utilisateur></utilisateurs>
-	</conv><conv><idConv>ac685947-1306-4a18-8839-4fba3e9ae493</idConv><nameConv>test</nameConv><idCreateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</idCreateur><messages/><utilisateurs><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur></utilisateurs></conv><conv><idConv>08c76531-accc-4131-bbe1-92cf9e4b8a77</idConv><nameConv>a</nameConv><idCreateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</idCreateur><messages/><utilisateurs><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur></utilisateurs></conv><conv><idConv>956d8889-31eb-4ef6-aaa0-6e79a3829c6c</idConv><nameConv>newconv</nameConv><idCreateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</idCreateur><messages/><utilisateurs><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur></utilisateurs></conv><conv><idConv>a640bd28-e0b7-49f5-83a5-fb88c1641900</idConv><nameConv>testconv</nameConv><idCreateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</idCreateur><messages><message><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur><text>blabla</text></message><message><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12</utilisateur><text>test</text></message><message><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur><text>a</text></message><message><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur><text>a</text></message><message><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12</utilisateur><text>b</text></message><message><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12</utilisateur><text>a</text></message><message><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12</utilisateur><text>a</text></message><message><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12</utilisateur><text>test</text></message><message><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12</utilisateur><text>coucou</text></message><message><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12</utilisateur><text>t</text></message><message><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12</utilisateur><text>tu</text></message><message><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur><text>teou</text></message></messages><utilisateurs><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12</utilisateur></utilisateurs></conv><conv><idConv>54f768d4-8906-4348-a568-b762678a23ea</idConv><nameConv>nouvelle conversation</nameConv><idCreateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</idCreateur><messages/><utilisateurs><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur></utilisateurs></conv><conv><idConv>dcef801d-fdbb-4a55-a610-a9b37a5aee0e</idConv><nameConv>slt</nameConv><idCreateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</idCreateur><messages/><utilisateurs><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur></utilisateurs></conv><conv><idConv>53787f1e-a351-4659-9f1a-33f3f8945acc</idConv><nameConv>testtest</nameConv><idCreateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</idCreateur><messages/><utilisateurs><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur></utilisateurs></conv><conv><idConv>c132a5ff-df09-4e93-8a48-a67aaabe7f42</idConv><nameConv>testtest</nameConv><idCreateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</idCreateur><messages/><utilisateurs><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur></utilisateurs></conv><conv><idConv>5211545e-1aac-4f81-bb58-b6b238fd5edb</idConv><nameConv>etd</nameConv><idCreateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</idCreateur><messages/><utilisateurs><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur></utilisateurs></conv><conv><idConv>9046b02b-b7cd-465d-b82d-c16c07b8df8e</idConv><nameConv>cree1</nameConv><idCreateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</idCreateur><messages/><utilisateurs><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur></utilisateurs></conv><conv><idConv>90c59fae-8447-48bc-aae0-1d578eb2a18f</idConv><nameConv>cree2</nameConv><idCreateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</idCreateur><messages/><utilisateurs><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur></utilisateurs></conv><conv><idConv>831e2c21-ba88-4536-9aa7-1da9700fe198</idConv><nameConv>TestLog</nameConv><idCreateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</idCreateur><messages/><utilisateurs><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur></utilisateurs></conv><conv><idConv>d6e19a4b-ad72-44a0-b2a7-f41a1add29ce</idConv><nameConv>TestLog2</nameConv><idCreateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</idCreateur><messages/><utilisateurs><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur></utilisateurs></conv></conversations>
+		</utilisateurs>
+	</conv>
+</conversations>

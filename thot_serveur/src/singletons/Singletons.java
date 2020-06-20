@@ -26,11 +26,21 @@ public class Singletons {
 		documentFactory = DocumentBuilderFactory.newInstance();
 		return documentFactory;
 	}
+	/**
+	 * Returns the log file.
+	 * @return File
+	 * @throws FileNotFoundException
+	 */
 	public static File getlogsFile() throws FileNotFoundException {
 		if (logFile != null) return logFile;
 		logFile = new File(Constant.logPath);
 		return logFile;
 	}
+	/**
+	 * Returns a file writer, so we can print error stack traces into log file.
+	 * @return FileWriter
+	 * @throws FileNotFoundException
+	 */
 	public static FileWriter getlogsWriter() throws FileNotFoundException {
 		if (logsWriter != null) return logsWriter;
 		try {

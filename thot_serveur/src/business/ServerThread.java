@@ -82,7 +82,7 @@ public class ServerThread extends Thread {
     public void newMessage() {
     	try {
     		Message m = (Message) input.readObject();  
-    		int convId = (int)input.readObject();
+    		UUID convId = (UUID)input.readObject();
     				
     		writeDataToXML.newMessage(m, convId);
     		output.writeObject(true);
@@ -123,7 +123,7 @@ public class ServerThread extends Thread {
     public void newConv() {
     	try {
     		Conversation c = (Conversation)input.readObject();
-		
+ 
     		writeDataToXML.newConv(c);
     		output.writeObject(true);
     		System.out.println("new conversation saved");
@@ -141,7 +141,7 @@ public class ServerThread extends Thread {
      */
     public void addUser() {
     	try {
-    		UUID userId = (UUID)input.readObject();
+    		String userId = (String)input.readObject();
     		UUID convId = (UUID)input.readObject();
 		
     		//Outputs true if user was successfully added to conversation.

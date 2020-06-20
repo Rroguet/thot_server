@@ -9,7 +9,7 @@
 				<text>bonjour de 1</text>
 			</message>
 			<message>
-				<utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur>
+				<utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12</utilisateur>
 				<text>bonjour de 2</text>
 			</message>
 			<message>
@@ -20,12 +20,10 @@
 				<utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur>
 				<text>test test test</text>
 			</message>
-		</messages>
+		<message><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur><text>blabla</text></message><message><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12</utilisateur><text>coucou</text></message><message><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur><text>hello</text></message></messages>
 		<utilisateurs>
 			<utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur>
 			<utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12</utilisateur>
-			<utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a19</utilisateur>
 			
-		</utilisateurs>
-	</conv> 
-</conversations>
+		<utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a19</utilisateur></utilisateurs>
+	</conv><conv><idConv>ac685947-1306-4a18-8839-4fba3e9ae493</idConv><nameConv>test</nameConv><idCreateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</idCreateur><messages/><utilisateurs><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur></utilisateurs></conv><conv><idConv>08c76531-accc-4131-bbe1-92cf9e4b8a77</idConv><nameConv>a</nameConv><idCreateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</idCreateur><messages/><utilisateurs><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur></utilisateurs></conv><conv><idConv>956d8889-31eb-4ef6-aaa0-6e79a3829c6c</idConv><nameConv>newconv</nameConv><idCreateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</idCreateur><messages/><utilisateurs><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur></utilisateurs></conv><conv><idConv>a640bd28-e0b7-49f5-83a5-fb88c1641900</idConv><nameConv>testconv</nameConv><idCreateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</idCreateur><messages><message><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur><text>blabla</text></message><message><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12</utilisateur><text>test</text></message><message><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur><text>a</text></message><message><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur><text>a</text></message><message><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12</utilisateur><text>b</text></message><message><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12</utilisateur><text>a</text></message><message><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12</utilisateur><text>a</text></message><message><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12</utilisateur><text>test</text></message><message><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12</utilisateur><text>coucou</text></message><message><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12</utilisateur><text>t</text></message><message><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12</utilisateur><text>tu</text></message></messages><utilisateurs><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</utilisateur><utilisateur>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12</utilisateur></utilisateurs></conv></conversations>

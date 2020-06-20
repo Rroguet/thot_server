@@ -56,4 +56,8 @@ public class Conversation implements Serializable{
 		messages.add(new Message(u.getId(),m));
 	}
 	
+	public List<UUID> getMember(){
+		return utilisateurs;
+	}
+	
 }

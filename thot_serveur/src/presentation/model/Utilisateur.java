@@ -49,4 +49,8 @@ public class Utilisateur implements Serializable{
 	public List<UUID> getConversationList(){
 		return conversationsId;
 	}
+	
+	public void addConv(UUID id) {
+		conversationsId.add(id);
+	}
 }

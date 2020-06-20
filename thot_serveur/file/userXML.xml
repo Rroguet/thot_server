@@ -6,8 +6,7 @@
 		<userName>un1</userName>
 		<id>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11</id>
 		<conversations>
-			<conversation>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a25</conversation>
-		</conversations> 
+			<conversation>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a25</conversation><conversation>ac685947-1306-4a18-8839-4fba3e9ae493</conversation><conversation>08c76531-accc-4131-bbe1-92cf9e4b8a77</conversation><conversation>956d8889-31eb-4ef6-aaa0-6e79a3829c6c</conversation><conversation>a640bd28-e0b7-49f5-83a5-fb88c1641900</conversation></conversations> 
 	</user>
 	<user>
 		<login>test2</login>
@@ -18,7 +17,7 @@
 		<id>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12</id>
 		<conversations>
 			<conversation>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a25</conversation>
-		</conversations>
+		<conversation>a640bd28-e0b7-49f5-83a5-fb88c1641900</conversation></conversations>
 	</user>
 	<user>
 		<login>loginU3</login>
@@ -28,7 +27,6 @@
 		<userName>u3</userName>
 		<id>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a19</id>
 		<conversations>
-			<conversation>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a25</conversation>
-		</conversations>
+		<conversation>a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a25</conversation></conversations>
 	</user>
 </users>

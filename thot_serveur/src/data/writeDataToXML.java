@@ -39,7 +39,7 @@ public class writeDataToXML {
 	 * @param idConv
 	 * Adds a message to convXML after it's been sent.
 	 */
-	public static void newMessage(Message m, int idConv) {
+	public static void newMessage(Message m, UUID idConv) {
 	    try{
 	      Document document = Singletons.getDocumentBuilder().parse(new File(Constant.pathConvXML));
 	      Element root = document.getDocumentElement();
@@ -209,7 +209,8 @@ public class writeDataToXML {
 	 * Performs necessary actions when a user is added to a conversation.
 	 * returns false if the user is already in the conversation.
 	 */
-	public static boolean addUserToConversation(UUID userId, UUID convId) {
+	public static boolean addUserToConversation(String pseudo, UUID convId) {
+		UUID userId = getDataFromXML.getUserByUname(pseudo).getId();
 		if(!addConvToUserConvList(userId,convId) || !addUserToConversationUserList(userId,convId)) return false;
 		return true;
 	}
@@ -246,6 +247,9 @@ public class writeDataToXML {
 		      root.appendChild(conv);
 		      	      
 		      createXMLFile(document,Constant.pathConvXML);
+		      
+		      addConvToUserConvList(c.getCreateur(),c.getConvId());
+		      addUserToConversationUserList(c.getCreateur(),c.getConvId());
 		      return;
 
 		    }catch (SAXException e){

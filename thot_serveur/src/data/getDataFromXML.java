@@ -55,8 +55,8 @@ public class getDataFromXML {
 	    					String userIdString = currentElement.getElementsByTagName("id").item(0).getTextContent();
 	    					UUID userId = UUID.fromString(userIdString);
 	    					NodeList nodeConv = currentElement.getElementsByTagName("conversations").item(0).getChildNodes();
-	    					for (int j = 1; j<nodeConv.getLength(); j+=2) {
-	    						conv.add(UUID.fromString(nodeConv.item(j).getTextContent()));
+	    					for (int j = 1; j<nodeConv.getLength(); j++) {
+	    						if (nodeConv.item(j).getNodeType() == Node.ELEMENT_NODE)conv.add(UUID.fromString(nodeConv.item(j).getTextContent()));
 	    					}
 	    					Utilisateur u = new Utilisateur(currentElement.getElementsByTagName("firstName").item(0).getTextContent(),
 	    										currentElement.getElementsByTagName("lastName").item(0).getTextContent(),
@@ -90,8 +90,8 @@ public class getDataFromXML {
 	    				try {
 	    					List<UUID> conv = new ArrayList<UUID>();
 	    					NodeList nodeConv = currentElement.getElementsByTagName("conversations").item(0).getChildNodes();
-	    					for (int j = 1; j<nodeConv.getLength(); j+=2) {
-	    						conv.add(UUID.fromString(nodeConv.item(j).getTextContent()));
+	    					for (int j = 1; j<nodeConv.getLength(); j++) {
+	    						if (nodeConv.item(j).getNodeType() == Node.ELEMENT_NODE)conv.add(UUID.fromString(nodeConv.item(j).getTextContent()));
 	    					}
 	    					Utilisateur u = new Utilisateur(currentElement.getElementsByTagName("firstName").item(0).getTextContent(),
 	    										currentElement.getElementsByTagName("lastName").item(0).getTextContent(),

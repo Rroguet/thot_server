@@ -7,6 +7,7 @@ import java.util.UUID;
 import data.writeDataToXML;
 import data.getDataFromXML;
 import presentation.model.*;
+import singletons.Singletons;
 /**
  * Serverside class handling received action from the client.
  * @author jules
@@ -27,7 +28,6 @@ public class ServerThread extends Thread {
 			//create the streams that will handle the objects coming through the sockets
 			input = new ObjectInputStream(socket.getInputStream());
 			output = new ObjectOutputStream(socket.getOutputStream());
-			
  
 			String action;
 			do {
@@ -44,22 +44,29 @@ public class ServerThread extends Thread {
 			} while (socket.isConnected());
 			
         } catch (IOException ex) {
-            System.out.println("Server exception: " + ex.getMessage());
+        	try {
+				Singletons.getlogsWriter().write("Server exception: " + ex.getMessage()+"\n");
+			} catch (IOException e) {
+			}
 		} catch (ClassNotFoundException ex) {
-            System.out.println("Server exception: " + ex.getMessage());
+			try {
+				Singletons.getlogsWriter().write("Server exception: " + ex.getMessage()+"\n");
+			} catch (IOException e) {
+			}
         } finally {
 			try {
 				output.close();
 				input.close();
+				Singletons.getlogsWriter().close();
 			} catch (IOException ioe) {
-				ioe.printStackTrace();
 			}
 		}
     }
     /**
      * Reads input from user login and outputs corresponding user info to the stream.
+     * @throws IOException 
      */
-    public void login() {
+    public void login() throws IOException {
     	try {
     		String login = (String)input.readObject();  //read the object received through the stream and deserialize it
     		String passWord = (String)input.readObject();  //read the object received through the stream and deserialize it
@@ -68,38 +75,48 @@ public class ServerThread extends Thread {
     		output.writeObject(u);
     		
     	} catch (IOException ex) {
-    		System.out.println("Server exception: " + ex.getMessage());
-    		ex.printStackTrace();
+    		Singletons.getlogsWriter().write("Server exception: " + ex.getMessage()+"\n");
+    		PrintWriter pw = new PrintWriter(new File("file.txt"));
+    	    ex.printStackTrace(pw);
+    	    pw.close();
 
     	} catch (ClassNotFoundException ex) {
-    		System.out.println("Server exception: " + ex.getMessage());
-    		ex.printStackTrace();
+    		Singletons.getlogsWriter().write("Server exception: " + ex.getMessage()+"\n");
+    		PrintWriter pw = new PrintWriter(new File("file.txt"));
+    	    ex.printStackTrace(pw);
+    	    pw.close();
     	}
     }
     /**
      * Reads input message from user and stores message in XML.
+     * @throws IOException 
      */
-    public void newMessage() {
+    public void newMessage() throws IOException {
     	try {
     		Message m = (Message) input.readObject();  
     		UUID convId = (UUID)input.readObject();
     				
     		writeDataToXML.newMessage(m, convId);
     		output.writeObject(true);
-    		System.out.println("new message saved");
+    		Singletons.getlogsWriter().write("new message saved"+"\n");
     	} catch (IOException ex) {
-    		System.out.println("Server exception: " + ex.getMessage());
-    		ex.printStackTrace();
+    		Singletons.getlogsWriter().write("Server exception: " + ex.getMessage()+"\n");
+    		PrintWriter pw = new PrintWriter(new File("file.txt"));
+    	    ex.printStackTrace(pw);
+    	    pw.close();
 
     	} catch (ClassNotFoundException ex) {
-    		System.out.println("Server exception: " + ex.getMessage());
-    		ex.printStackTrace();
+    		Singletons.getlogsWriter().write("Server exception: " + ex.getMessage()+"\n");
+    		PrintWriter pw = new PrintWriter(new File("file.txt"));
+    	    ex.printStackTrace(pw);
+    	    pw.close();
     	}
     }
     /**
      * Reads info for a new user, then adds it into userXML.
+     * @throws IOException 
      */
-    public void newUser() {
+    public void newUser() throws IOException {
     	try {
     		String login = (String)input.readObject();
     		String passWord = (String)input.readObject();
@@ -107,94 +124,118 @@ public class ServerThread extends Thread {
 		
     		//Outputs true if user was created successfully.
     		output.writeObject(writeDataToXML.newUser(u, login, passWord));
-    		System.out.println("new user saved");
+    		Singletons.getlogsWriter().write("new user saved : " + u.getId()+"\n");
     	} catch (IOException ex) {
-    		System.out.println("Server exception: " + ex.getMessage());
-    		ex.printStackTrace();
+    		Singletons.getlogsWriter().write("Server exception: " + ex.getMessage()+"\n");
+    		PrintWriter pw = new PrintWriter(new File("file.txt"));
+    	    ex.printStackTrace(pw);
+    	    pw.close();
 
     	} catch (ClassNotFoundException ex) {
-    		System.out.println("Server exception: " + ex.getMessage());
-    		ex.printStackTrace();
+    		Singletons.getlogsWriter().write("Server exception: " + ex.getMessage()+"\n");
+    		PrintWriter pw = new PrintWriter(new File("file.txt"));
+    	    ex.printStackTrace(pw);
+    	    pw.close();
     	}
     }
     /**
      * Reads info for a new conversation, then adds it to conversation XML.
+     * @throws IOException 
      */
-    public void newConv() {
+    public void newConv() throws IOException {
     	try {
     		Conversation c = (Conversation)input.readObject();
- 
-    		writeDataToXML.newConv(c);
-    		output.writeObject(true);
-    		System.out.println("new conversation saved");
+    		//Outputs true if conv successfully created.
+    		output.writeObject(writeDataToXML.newConv(c));
+    		Singletons.getlogsWriter().write("new conversation saved : "+ c.getConvId()+"\n");
     	} catch (IOException ex) {
-    		System.out.println("Server exception: " + ex.getMessage());
-    		ex.printStackTrace();
+    		Singletons.getlogsWriter().write("Server exception: " + ex.getMessage()+"\n");
+    		PrintWriter pw = new PrintWriter(new File("file.txt"));
+    	    ex.printStackTrace(pw);
+    	    pw.close();
 
     	} catch (ClassNotFoundException ex) {
-    		System.out.println("Server exception: " + ex.getMessage());
-    		ex.printStackTrace();
+    		Singletons.getlogsWriter().write("Server exception: " + ex.getMessage()+"\n");
+    		PrintWriter pw = new PrintWriter(new File("file.txt"));
+    	    ex.printStackTrace(pw);
+    	    pw.close();
     	}
     }
     /**
      * Reads a userID and a convID, then adds the user to the conversation's user list.
+     * @throws IOException 
      */
-    public void addUser() {
+    public void addUser() throws IOException {
     	try {
     		String userId = (String)input.readObject();
     		UUID convId = (UUID)input.readObject();
 		
     		//Outputs true if user was successfully added to conversation.
     		output.writeObject(writeDataToXML.addUserToConversation(userId, convId));
-    		//System.out.println("user added to conversation"); REPLACE WITH LOGS
+    		Singletons.getlogsWriter().write("user added to conversation.");
     	} catch (IOException ex) {
-    		System.out.println("Server exception: " + ex.getMessage());
-    		ex.printStackTrace();
+    		Singletons.getlogsWriter().write("Server exception: " + ex.getMessage()+"\n");
+    		PrintWriter pw = new PrintWriter(new File("file.txt"));
+    	    ex.printStackTrace(pw);
+    	    pw.close();
 
     	} catch (ClassNotFoundException ex) {
-    		System.out.println("Server exception: " + ex.getMessage());
-    		ex.printStackTrace();
+    		Singletons.getlogsWriter().write("Server exception: " + ex.getMessage()+"\n");
+    		PrintWriter pw = new PrintWriter(new File("file.txt"));
+    	    ex.printStackTrace(pw);
+    	    pw.close();
     	}
     }
     /**
      * Reads a userId, then outputs corresponding user's list of conversations' names to the stream.
+     * @throws IOException 
      */
-    public void getUserConvNameList() {
+    public void getUserConvNameList() throws IOException {
     	try {
     		UUID userId = (UUID)input.readObject();
     		Utilisateur u = getDataFromXML.getUserById(userId);
     		List<String> convNames = getDataFromXML.getConvNamesOfUser(u);
     		output.writeObject(convNames);
     	} catch (IOException ex) {
-    		System.out.println("Server exception: " + ex.getMessage());
-    		ex.printStackTrace();
+    		Singletons.getlogsWriter().write("Server exception: " + ex.getMessage()+"\n");
+    		PrintWriter pw = new PrintWriter(new File("file.txt"));
+    	    ex.printStackTrace(pw);
+    	    pw.close();
 
     	} catch (ClassNotFoundException ex) {
-    		System.out.println("Server exception: " + ex.getMessage());
-    		ex.printStackTrace();
+    		Singletons.getlogsWriter().write("Server exception: " + ex.getMessage()+"\n");
+    		PrintWriter pw = new PrintWriter(new File("file.txt"));
+    	    ex.printStackTrace(pw);
+    	    pw.close();
     	}
     }
     /**
      * Reads a conversation ID, then outputs corresponding conversation object to the stream.
+     * @throws IOException 
      */
-    public void getSelectedConvById() {
+    public void getSelectedConvById() throws IOException {
     	try {
     		UUID convId = (UUID)input.readObject();
     		Conversation conv = getDataFromXML.getConvById(convId);
     		output.writeObject(conv);
     	} catch (IOException ex) {
-    		System.out.println("Server exception: " + ex.getMessage());
-    		ex.printStackTrace();
+    		Singletons.getlogsWriter().write("Server exception: " + ex.getMessage()+"\n");
+    		PrintWriter pw = new PrintWriter(new File("file.txt"));
+    	    ex.printStackTrace(pw);
+    	    pw.close();
 
     	} catch (ClassNotFoundException ex) {
-    		System.out.println("Server exception: " + ex.getMessage());
-    		ex.printStackTrace();
+    		Singletons.getlogsWriter().write("Server exception: " + ex.getMessage()+"\n");
+    		PrintWriter pw = new PrintWriter(new File("file.txt"));
+    	    ex.printStackTrace(pw);
+    	    pw.close();
     	}
     }
     /**
      * Reads a conversation ID, then outputs the names of every user participating in the conversation.
+     * @throws IOException 
      */
-    public void getUsersNames() {
+    public void getUsersNames() throws IOException {
     	//TODO output the list of all users' names.
     	try {
     		@SuppressWarnings("unchecked")
@@ -205,12 +246,16 @@ public class ServerThread extends Thread {
     		}
     		output.writeObject(usersNames);
     	} catch (IOException ex) {
-    		System.out.println("Server exception: " + ex.getMessage());
-    		ex.printStackTrace();
+    		Singletons.getlogsWriter().write("Server exception: " + ex.getMessage()+"\n");
+    		PrintWriter pw = new PrintWriter(new File("file.txt"));
+    	    ex.printStackTrace(pw);
+    	    pw.close();
 
     	} catch (ClassNotFoundException ex) {
-    		System.out.println("Server exception: " + ex.getMessage());
-    		ex.printStackTrace();
+    		Singletons.getlogsWriter().write("Server exception: " + ex.getMessage()+"\n");
+    		PrintWriter pw = new PrintWriter(new File("file.txt"));
+    	    ex.printStackTrace(pw);
+    	    pw.close();
     	}
     }
 }

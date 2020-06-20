@@ -3,6 +3,8 @@ package business;
 import java.io.*;  
 import java.net.*;
 
+import singletons.Singletons;
+
 
 /**
  * Starts server and waits for connection
@@ -18,10 +20,10 @@ public class FirstServer extends AbstractServer{
 		try {
 			//the server socket is defined only by a port (its IP is localhost)
 			ss = new ServerSocket (6667);  
-			System.out.println("Server waiting for connection...");
+			Singletons.getlogsWriter().write("Server waiting for connection...\n");
 			while (true) {
 				Socket socket = ss.accept();//establishes connection 
-				System.out.println("Connected as " + ip);	
+				Singletons.getlogsWriter().write("Connected as " + ip+"\n");	
 				// create a new thread to handle client socket	
 				new ServerThread(socket).start();				
 			}

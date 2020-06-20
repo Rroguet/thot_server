@@ -10,8 +10,10 @@ import org.xml.sax.SAXException;
 
 import org.w3c.dom.*;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.UUID;
 import java.io.File;
+import java.io.FileNotFoundException;
 
 /**
  * This class is used to write data in XML files.
@@ -21,7 +23,7 @@ import java.io.File;
  */
 public class writeDataToXML {
 	
-	public static void createXMLFile(Document document, String filePath){
+	public static void createXMLFile(Document document, String filePath) throws FileNotFoundException{
 		try {
 			DOMSource source = new DOMSource(document);
     	    TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -30,7 +32,9 @@ public class writeDataToXML {
     	    transformer.transform(source, result);
 		
 		} catch (TransformerException tfe) {
-            tfe.printStackTrace();
+			PrintWriter pw = new PrintWriter(new File(Constant.logPath));
+		    tfe.printStackTrace(pw);
+		    pw.close();
         }
 	}
 	/**
@@ -219,7 +223,7 @@ public class writeDataToXML {
 	 * @param c conversation object that will be added to XML.
 	 * Adds the conversation in parameter to conversationXML.
 	 */
-	public static void newConv(Conversation c) {
+	public static boolean newConv(Conversation c) {
 		try{
 		      Document document = Singletons.getDocumentBuilder().parse(new File(Constant.pathConvXML));
 		      Element root = document.getDocumentElement();
@@ -250,11 +254,12 @@ public class writeDataToXML {
 		      
 		      addConvToUserConvList(c.getCreateur(),c.getConvId());
 		      addUserToConversationUserList(c.getCreateur(),c.getConvId());
-		      return;
+		      return true;
 
 		    }catch (SAXException e){
 		    }catch (IOException e){
 		    }
+		return false;
 	}
 
 }

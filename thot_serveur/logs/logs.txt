@@ -1,0 +1,4 @@
+Server waiting for connection...
+Connected as localhost
+new conversation saved : d6e19a4b-ad72-44a0-b2a7-f41a1add29ce
+Server exception: Connection reset
